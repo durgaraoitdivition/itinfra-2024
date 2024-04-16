@@ -1,0 +1,114 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "db"
+  },
+  "AccessToken": {
+    "dataSource": "db",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "db",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "db",
+    "public": false,
+    "options": {
+      "strictObjectIDCoercion": true
+    }
+  },
+  "Role": {
+    "dataSource": "db",
+    "public": false
+  },
+  "dbreports": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Itinfraassetupdate": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "Itinfraassets": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "Itinfracampusmaster": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "Itinfrainstmaster": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "Itinfraitemdetails": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "Itinfraitemgroup": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "Itinfraitems": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "Itinfralocations": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "Itinfrashipment": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "Itinfrausers": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "Itinfrastructure": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "Assets": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "Ticketstatus": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "Tickets": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "TicketMaster": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Userpermissions": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "Vendordetails": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "Indent": {
+    "dataSource": "mysql",
+    "public": true
+  }
+}

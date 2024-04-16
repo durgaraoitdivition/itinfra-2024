@@ -1,0 +1,562 @@
+{
+  "name": "dbreports",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {
+    "topicslist": {
+      "accepts": [
+        {
+          "arg": "wetattuserid",
+          "type": "number",
+          "required": false,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/topicLists",
+          "verb": "get"
+        }
+      ]
+    },
+    "dailyreport": {
+      "accepts": [
+        {
+          "arg": "date",
+          "type": "string",
+          "required": false,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/dailyreport",
+          "verb": "get"
+        }
+      ]
+    },
+    "studentwise": {
+      "accepts": [],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/studentwise",
+          "verb": "get"
+        }
+      ]
+    },
+    "branchwisetopic": {
+      "accepts": [],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/branchTopicwise",
+          "verb": "get"
+        }
+      ]
+    },
+    "userallottedcampus": {
+      "accepts": [
+        {
+          "arg": "allottedids",
+          "type": "string",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/allottedCampus",
+          "verb": "get"
+        }
+      ]
+    },
+    "getstockuid": {
+      "accepts": [
+        {
+          "arg": "UserId",
+          "type": "number",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/UserWisedata",
+          "verb": "get"
+        }
+      ]
+    },
+    "lastshippedid": {
+      "accepts": [],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/LastShipId",
+          "verb": "get"
+        }
+      ]
+    },
+    "getuserinfo": {
+      "accepts": [
+        {
+          "arg": "CampusId",
+          "type": "string",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/UserInfobyCPid",
+          "verb": "get"
+        }
+      ]
+    },
+    "updatecurid": {
+      "accepts": [
+        {
+          "arg": "adshipid",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        {
+          "arg": "curshipid",
+          "type": "string",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/UpdateCid",
+          "verb": "post"
+        }
+      ]
+    },
+    "receiveditemsbyids": {
+      "accepts": [
+        {
+          "arg": "CampusId",
+          "type": "string",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/getrcvitemsbyids",
+          "verb": "get"
+        }
+      ]
+    },
+    "updatercvstatus": {
+      "accepts": [
+        {
+          "arg": "AdShipId",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        {
+          "arg": "Received",
+          "type": "number",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/UpdateRcvStatus",
+          "verb": "post"
+        }
+      ]
+    },
+    "getitemgroup": {
+      "accepts": [
+        {
+          "arg": "Itemgroup",
+          "type": "string",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/itemgroupwise",
+          "verb": "get"
+        }
+      ]
+    },
+    "itemsbranchwise": {
+      "accepts": [
+        {
+          "arg": "campusname",
+          "type": "string",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/itemcmpwise",
+          "verb": "get"
+        }
+      ]
+    },
+    "updateitemdetails": {
+      "accepts": [
+        {
+          "arg": "itinfraid",
+          "type": "number",
+          "required": true,
+          "description": ""
+        },
+        {
+          "arg": "ititemid",
+          "type": "number",
+          "required": true,
+          "description": ""
+        },
+        {
+          "arg": "uids",
+          "type": "string",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/UpdateInfraids",
+          "verb": "post"
+        }
+      ]
+    },
+    "getassetslimitedfileds": {
+      "accepts": [
+        {
+          "arg": "campusname",
+          "type": "string",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/GetAssetsLimitedFileds",
+          "verb": "get"
+        }
+      ]
+    },
+    "addorupdateitem": {
+      "accepts": [
+        {
+          "arg": "itemdetails",
+          "type": "object",
+          "required": false,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/AddorUpdateitem",
+          "verb": "post"
+        }
+      ]
+    },
+    "itemstatuschange": {
+      "accepts": [
+        {
+          "arg": "itinfraid",
+          "type": "number",
+          "required": true,
+          "description": ""
+        },
+        {
+          "arg": "status",
+          "type": "number",
+          "required": true,
+          "description": ""
+        },
+        {
+          "arg": "ititemid",
+          "type": "number",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/ItemStatusChange",
+          "verb": "post"
+        }
+      ]
+    },
+    "datamigrate": {
+      "accepts": [],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/DataMigrate",
+          "verb": "get"
+        }
+      ]
+    },
+    "datamigrateafterdsk": {
+      "accepts": [],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/DataMigrateAfterDsk",
+          "verb": "get"
+        }
+      ]
+    },
+    "sparepartsreport": {
+      "accepts": [
+        {
+          "arg": "startdate",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        {
+          "arg": "enddate",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        {
+          "arg": "branchwise",
+          "type": "string",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/sparePartList",
+          "verb": "post"
+        }
+      ]
+    },
+    "repairedorperfect": {
+      "accepts": [
+        {
+          "arg": "itemName",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        {
+          "arg": "campusName",
+          "type": "string",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/repairedcount",
+          "verb": "post"
+        }
+      ]
+    }
+  }
+}

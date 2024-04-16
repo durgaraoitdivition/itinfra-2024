@@ -1,0 +1,127 @@
+[
+	{
+		"parents": "Stock",
+		"icon": "fa fa-stack-overflow",
+		"links"		:	"stock",
+		"submenu": [
+			{
+				"title"		:	"",
+				"links"		:	"#userhome",
+                "tag" 		: 	"/userhome",
+				"url"		:	"userhome.html",
+				"controller":	"userhome"
+            },
+			{
+				"title"		:	"Add / Update Stock",
+				"links"		:	"#addstock",
+				"tag" 		: 	"/addstock",
+				"url"		:	"addstock.html",
+				"controller":	"stockinfo"
+			},
+			{
+				"title"		:	"",
+				"links"		:	"#additems",
+				"tag" 		: 	"/additems",
+				"url"		:	"additems.html",
+				"controller":	"additems"
+			},
+			{
+				"title"		:	"",
+				"links"		:	"#updatestock",
+				"tag" 		: 	"/updatestock",
+				"url"		:	"updatestock.html",
+				"controller":	"updatestock"
+			},
+			{
+				"title"		:	"",
+				"links"		:	"#uploadscancopy",
+                "tag" 		: 	"/uploadscancopy",
+				"url"		:	"uploadscancopy.html",
+				"controller":	"uploadscancopy"
+            },
+            {
+				"title"		:	"Stock List",
+				"links"		:	"#stocklist",
+                "tag" 		: 	"/stocklist",
+				"url"		:	"stocklist.html",
+				"controller":	"stockinfo"
+            },
+			{
+				"title"		:	"",
+				"links"		:	"#itemsbasedongroup",
+				"tag" 		: 	"/itemsbasedongroup",
+				"url"		:	"itemsbasedongroup.html",
+				"controller":	"itemsbasedongroup"
+			}]
+    },
+    {
+		"parents": "Tickets",
+		"icon": "fa fa-ticket",
+		"links"		:	"Tickets",
+        "submenu": [             
+            {
+				"title"		:	"Open Tikets",
+				"links"		:	"#pendingtickets",
+                "tag" 		: 	"/pendingtickets",
+				"url"		:	"pendingtickets.html",
+				"controller":	"pendingtickets"
+            },
+			{
+				"title"		:	"Closed Tikets",
+				"links"		:	"#closedtickets",
+                "tag" 		: 	"/closedtickets",
+				"url"		:	"closedtickets.html",
+				"controller":	"closedtickets"
+            },
+            {
+				"title"		:	"",
+				"links"		:	"#ticketupdate",
+                "tag" 		: 	"/ticketupdate",
+				"url"		:	"ticketupdate.html",
+				"controller":	"ticketupdate"
+            },
+			{
+				"title"		:	"",
+				"links"		:	"#getticketinfousingno",
+                "tag" 		: 	"/getticketinfousingno",
+				"url"		:	"getticketinfousingno.html",
+				"controller":	"getticketinfousingno"
+            }]
+    },
+    {
+		"parents": "Shipment",
+		"icon": "fa fa-book",
+		"links"		:	"shipment",
+        "submenu": [             
+            {
+				"title"		:	"Book / Track Shipment",
+				"links"		:	"#trackshipment",
+                "tag" 		: 	"/trackshipment",
+				"url"		:	"trackshipment.html",
+				"controller":	"shippinginfo"
+            },
+            {
+				"title"		:	"Inward List",
+				"links"		:	"#inwardlist",
+                "tag" 		: 	"/inwardlist",
+				"url"		:	"inwardlist.html",
+				"controller":	"inwordentry"
+            },
+			{
+				"title"		:	"",
+				"links"		:	"#adshipidwiselist",
+                "tag" 		: 	"/adshipidwiselist",
+				"url"		:	"adshipidwiselist.html",
+				"controller":	"shippinginfo"
+            },
+            {
+				"title"		:	"",
+				"links"		:	"#bookshipment",
+                "tag" 		: 	"/bookshipment",
+				"url"		:	"bookshipment.html",
+				"controller":	"shippinginfo"
+            }]
+    }
+    
+	 
+]

@@ -1,0 +1,72 @@
+[
+	{
+		"parents": "Stock",
+		"icon": "fa fa-stack-overflow",
+		"links"		:	"stock",
+		"submenu": [
+			{
+				"title"		:	"",
+				"links"		:	"#labasthome",
+                "tag" 		: 	"/labasthome",
+				"url"		:	"labasthome.html",
+				"controller":	"labasthome"
+            },
+			{
+				"title"		:	"Add / Update Stock",
+				"links"		:	"#addstock",
+				"tag" 		: 	"/addstock",
+				"url"		:	"addstock.html",
+				"controller":	"stockinfo"
+			},
+			{
+				"title"		:	"",
+				"links"		:	"#updatestock",
+				"tag" 		: 	"/updatestock",
+				"url"		:	"updatestock.html",
+				"controller":	"updatestock"
+			},
+			{
+				"title"		:	"",
+				"links"		:	"#itemsbasedongroup",
+				"tag" 		: 	"/itemsbasedongroup",
+				"url"		:	"itemsbasedongroup.html",
+				"controller":	"itemsbasedongroup"
+			}]
+    },
+    {
+		"parents": "Tickets",
+		"icon": "fa fa-ticket",
+		"links"		:	"Tickets",
+        "submenu": [             
+            {
+				"title"		:	"Open Tikets",
+				"links"		:	"#pendingtickets",
+                "tag" 		: 	"/pendingtickets",
+				"url"		:	"pendingtickets.html",
+				"controller":	"pendingtickets"
+            },
+			{
+				"title"		:	"Closed Tikets",
+				"links"		:	"#closedtickets",
+                "tag" 		: 	"/closedtickets",
+				"url"		:	"closedtickets.html",
+				"controller":	"closedtickets"
+            },
+            {
+				"title"		:	"",
+				"links"		:	"#ticketupdate",
+                "tag" 		: 	"/ticketupdate",
+				"url"		:	"ticketupdate.html",
+				"controller":	"ticketupdate"
+            },
+			{
+				"title"		:	"",
+				"links"		:	"#getticketinfousingno",
+                "tag" 		: 	"/getticketinfousingno",
+				"url"		:	"getticketinfousingno.html",
+				"controller":	"getticketinfousingno"
+            }]
+    }
+    
+	 
+]

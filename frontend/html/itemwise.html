@@ -1,0 +1,154 @@
+<div ng-controller="stkreports">	
+			
+			<aside class="right-side">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1>
+                        Item Wise Stock
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li class="active">Dashboard</li>
+                    </ol>
+                </section>
+
+                <!-- Main content -->
+                <section class="content">
+					
+                    		<div class="box box-primary">
+                                
+                                <div class="box-body">
+                                    
+									<!--<div class="row  hidden-print">	
+										<div class="col-md-3">
+											<div class="form-group" ng-init="InfraItems()">
+												<label>Select Item Group</label>
+												<select ng-model="ititemgroup" class="form-control" ng-change="getitemname(ititemgroup)" required>  
+													  <option value="">Select Item Group</option>  
+													  <option ng-repeat="x in itemslist" value="{{x.ititemgrpname}}">{{x.ititemgrpname}}</option>  
+												 </select>
+											</div>
+										</div>
+										<div class="col-md-3">	
+											<div class="form-group">
+												<label>Select Item Name</label>
+												<select ng-model="ititemname" class="form-control" ng-change="gettotalitems(ititemname)" required>  
+													  <option value="">Select Item Name</option>  
+													  <option ng-repeat="x in totalitems" value="{{x.ititemname}}">{{x.ititemname}}</option>  
+												 </select>
+											</div>
+										</div>
+										<div class="col-md-6"><br />
+											<div onClick="printfuntion()" class="pull-right"><i class="fa fa-print fa-2x"></i></div>
+										</div>
+									</div>-->	
+									
+									<div class="row  hidden-print">	
+										<div class="col-md-3">
+											<div class="form-group" ng-init="InfraItems()">
+												<label>Select Item Group</label>
+												<select ng-model="ititemgroup" class="form-control" ng-change="getitemsgroup(ititemgroup)" required>  
+													  <option value="">Select Item Group</option>  
+													  <option ng-repeat="x in itemslist" value="{{x.ititemgrpname}}">{{x.ititemgrpname}}</option>  
+												 </select>
+											</div>
+										</div>
+										<div class="col-md-5">
+										</div>
+										<div class="col-md-4" style="padding-top:5"><br />
+											
+											<div class="input-group" ng-show="item.CurPickId==null">
+														<input type="text" class="form-control" placeholder="Search..." ng-model="serchtext" />
+														<span class="input-group-btn">
+															<button class="btn btn-info btn-flat" onClick="printfuntion()" type="button"><i class="fa fa-print"></i></button>
+														</span>
+													</div>
+										</div>
+									</div>
+
+									<table class="table table-bordered" ng-repeat="y in itemnamewise" style="margin-bottom:10px">
+											<thead>
+												<!--<tr>
+													<th colspan="5">
+														<div class="row">
+															<div class="col-md-8"></div>
+															<div class="col-md-4">
+																<input type="text" class="form-control" placeholder="Search..." ng-model="serchtext" />
+															</div>
+														</div>		
+													</th>
+												</tr>-->
+												<tr>
+													<th colspan="4" style="text-transform:uppercase" class="bg-gray">{{y[0].ItemName}}</th>
+												</tr>
+											  <tr>
+												<th>#</th>
+												<th>BRANCH</th>
+												<th>ITEM NAME</th>
+												<th>QUANTITY</th>
+											  </tr>
+											</thead>
+											<tbody>
+											  <tr ng-repeat="item in y | filter:serchtext | orderBy:['InstId']">
+												<td>{{$index+1}}</td>
+												<td>{{item.campusName}}</td>
+												<td>{{item.ItemName}}</td>
+												<td align="right">{{item.ititemqty}}</td>
+											  </tr>
+											  <tr>
+												<td colspan="3" align="right"><strong>Total Items</strong></td>
+												<td align="right"><strong>{{ y | sumByColumn: 'ititemqty' }}</strong></td>
+											</tr>
+											</tbody>
+										  </table>
+									
+									<!--<table class="table table-bordered" ng-if="itemgroupwise != null">
+											<thead>
+												<tr>
+													<th colspan="5">
+														<div class="row">
+															<div class="col-md-8"></div>
+															<div class="col-md-4">
+																<input type="text" class="form-control" placeholder="Search..." ng-model="serchtext" />
+															</div>
+														</div>		
+													</th>
+												</tr>
+											  <tr>
+												<th>#</th>
+												<th>Branch</th>
+												<th>Item Group</th>
+												<th>Item Name</th>
+												<th>Qunatity</th>
+											  </tr>
+											</thead>
+											<tbody>
+											  <tr ng-repeat="item in itemgroupwise| filter:serchtext | orderBy:['InstId','CampusId']">
+												<td>{{$index+1}}</td>
+												<td>{{item.CampusName}}</td>
+												<td>{{item.itItemGroup}}</td>
+												<td>{{item.itItemName}}</td>
+												<td>{{item.quntity}}</td>
+											  </tr>
+											  <tr>
+												<th colspan="4" align="right">Total Items</th>
+												<th>{{ itemgroupwise | sumByColumn: 'quntity' }}</th>
+											</tr>
+											</tbody>
+										  </table>-->	
+									
+									<div style="clear:both"></div>
+                                </div><!-- /.box-body -->
+
+                            </div>
+		
+
+                </section>
+            </aside>
+                    
+                     
+						
+            
+          
+        </div><!-- ./wrapper -->
+

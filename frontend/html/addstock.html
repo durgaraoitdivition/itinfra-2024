@@ -1,0 +1,80 @@
+
+    <div ng-app="stock" ng-controller="stockinfo">
+        <!-- header logo: style can be found in header.less -->
+
+        <aside class="right-side">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1>
+                        Add / Update Stock
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li class="active">Add / Update Stock</li>
+                    </ol>
+                </section>
+        
+			
+
+                <!-- Main content -->
+                <section class="content">
+					
+                    		<div class="box box-primary">
+                                <div class="box-header" ng-init="campuStock()">
+									<!-- <h3 class="box-title">
+										<select ng-model="defaultid" class="form-control" ng-options="campus.id as campus.campus_name for campus in allotedcmp" ng-change="campuStock(defaultid)"></select>
+									</h3> -->
+                                    <div class="box-tools pull-right" ng-hide="userdata[0].usertype==3">
+										<a href="#additems"  class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add item</a>
+                                    </div>
+                                </div><!-- /.box-header -->
+                                <div class="box-body">
+								
+								<!--{{cmpwiselist[0].instid}}
+								<span ng-show="cmpwiselist[0].instid==1">test</span>-->
+                                    <table class="table table-striped table-bordered" ng-if="cmpwiselist!=null">
+										<thead>
+											<tr>
+												<th>S.No</th>
+												<th>Item Group</th>
+												<th>Item Name</th>
+												<th>Location</th>
+												<th>Sub Location</th>
+												<th>Quantity</th>
+											</tr>	
+										</thead>
+										<tbody>
+											<tr ng-if="cmpwiselist==''">
+												<td colspan="7" align="center"><h3>Items Not Entered</h3></td>
+											</tr>
+											<tr ng-repeat="x in cmpwiselist | orderBy:['ItemGroupName','ItemName','assetLocationGroup', 'assetLocationName']">
+												<td>{{$index+1}}</td>
+												<td>{{x.ItemGroupName}}</td>
+												<td>{{x.ItemName}}</td>
+												<td>{{x.assetLocationGroup}}</td>
+												<td>{{x.assetLocationName}}</td>
+												<td><a href="#itemsbasedongroup?campusname={{x.campusName}}&ItemGroupName={{x.ItemGroupName}}&ItemName={{x.ItemName}}&assetlocationgroup={{x.assetLocationGroup}}&assetlocationname={{x.assetLocationName}}">{{x.ititemqty}}</a></td>
+											</tr>	
+										</tbody>
+										<tfoot ng-if="cmpwiselist!=''">
+											<tr>
+												<th colspan="5" align="right">Total Items</th>
+												<th colspan="2">{{ cmpwiselist | sumByColumn: 'ititemqty' }}</th>
+											</tr>
+										</tfoot>
+									</table>
+                                </div><!-- /.box-body -->
+
+                            </div>
+							
+							
+							
+
+                </section>
+      </aside>     
+        <!-- add new calendar event modal -->
+
+
+
+
+    </div>

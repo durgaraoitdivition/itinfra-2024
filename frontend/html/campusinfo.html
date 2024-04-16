@@ -1,0 +1,101 @@
+
+<div ng-controller="campusinfo">		
+    <aside class="right-side">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Campus List
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#home"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active">Campus List</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            
+                    <div class="box box-primary">
+                        <!-- <div class="box-header">
+                            <div class="box-tools pull-right">
+                                <button class="btn btn-default pull-right" data-toggle="modal" data-target="#addCampus"><i class="fa fa-plus"></i> User List</button>
+                            </div>
+                        </div>/.box-header -->
+                        <div class="box-body" ng-init="ItInfraCampus()">
+                            
+                            <table class="table table-striped" id="incdata">
+                                <thead>
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>Campus</th>
+                                        <th>Incharge</th>
+                                        <th>Phone</th>
+                                        <th>E-mail</th>
+                                        <th>Edit</th>
+                                    </tr>	
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="x in campusdata" repeat-done="initDataTable">
+                                        <td>{{$index+1}}</td>
+                                        <td>{{x.campusName}}</td>
+                                        <td>{{x.campusIncharge}}</td>
+                                        <td>{{x.campusPhone}}</td>
+                                        <td>{{x.campusEmail}}</td>
+                                        <td><a href="" data-toggle="modal" data-target="#addCampus"  class="text-info" ng-click="edituser(x.id)"><i class="fa fa-edit"></i></a></td>
+                                    </tr>	
+                                </tbody>
+                            </table>
+                        </div><!-- /.box-body -->
+
+                    </div>
+
+
+        </section>
+    </aside>
+
+
+<!-- add new calendar event modal -->
+<div class="modal fade" id="addCampus" role="dialog">
+<div class="modal-dialog">
+
+<!-- Modal content-->
+<div class="modal-content">
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal">&times;</button>
+  <h4 class="modal-title">Add Stock</h4>
+</div>
+<div class="modal-body">
+  <form ng-submit="addCampus(user)" method="post" name="frmDefault">
+   
+    <div class="form-group">
+        <label>Incharge Name</label>
+        <input type="text" ng-model="user.campusIncharge" class="form-control" placeholder="Incharge Name" required/>
+    </div>
+    <div class="form-group">
+        <label>Incharge Email</label>
+        <input type="email" ng-model="user.campusEmail" class="form-control" placeholder="Incharge Email" required/>
+    </div>
+    <div class="form-group">
+        <label>Incharge Phone</label>
+        <input type="text" ng-model="user.campusPhone" class="form-control" placeholder="Incharge Phone" required/>
+    </div>
+    <div class="form-group">
+        <label>Campus City</label>
+        <input type="text" ng-model="user.campusCity" class="form-control" placeholder="Campus City" required/>
+    </div>
+    <div class="form-group">
+        <label>Campus Address</label>
+        <input type="text" ng-model="user.campusAddress" class="form-control" placeholder="Campus Address" required/>
+    </div>
+    <div class="footer">                                                               
+        <button type="submit" class="btn bg-olive btn-block">Submit</button>  
+    </div>
+</form>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div> 

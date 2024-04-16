@@ -1,0 +1,93 @@
+angular.module('AngularChart', []).directive('chart', function () {
+    return {
+        restrict:'E',
+        template:'<div></div>',
+        transclude:true,
+        replace:true,
+        scope: '=',
+        link:function (scope, element, attrs) {
+            
+            var opt = {
+                chart:{
+                    renderTo:element[0],
+                    type:attrs.type,
+                    marginRight:0,
+					marginTop:50,
+                    marginBottom:40,
+                },
+                title:{
+                    text:attrs.title,
+                    x:-20 //center
+                },
+                subtitle:{
+                    text:attrs.subtitle,
+                    x:-20
+                },
+                xAxis:{
+                    //categories:['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun','Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    tickInterval:1,
+                    title:{
+                        text:attrs.xname
+                    }
+                },
+                plotOptions:{
+                    lineWidth:0.5
+                },
+                yAxis:{
+                    title:{
+                        text:attrs.yname
+                    },
+                    tickInterval:(attrs.yinterval)?new Number(attrs.yinterval):null,
+                    max:attrs.ymax,
+                    min: attrs.ymin
+//                    ,
+//                    plotLines:[
+//                        {
+//                            value:0,
+//                            width:1,
+//                            color:'#808080'
+//                        }
+//                    ]
+                },
+                tooltip:{
+                    formatter:scope[attrs.formatter]||function () {
+                        return '<b>' + this.y + '</b>'
+                    }
+                },
+                legend:{
+                    layout:'horizontal',
+                    align:'center',
+                    verticalAlign:'top',
+                    x:-10,
+                    y:0,
+                    borderWidth:0
+                },
+               
+            }
+
+
+            //Update when charts data changes
+            scope.$watch(function (scope) {
+                return JSON.stringify({
+                    xAxis:{
+                        categories:scope[attrs.xdata]
+                        },
+                    series:scope[attrs.ydata]
+                });
+            }, function (news) {
+               // console.log('ola')
+//                if (!attrs) return;
+                news = JSON.parse(news)
+                if (!news.series)return;
+                angular.extend(opt,news)
+                //console.log('opt.xAxis.title.text',opt)
+                
+
+
+
+                var chart = new Highcharts.Chart(opt);
+            });
+        }
+    }
+
+})

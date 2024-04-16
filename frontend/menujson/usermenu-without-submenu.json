@@ -1,0 +1,87 @@
+[
+	{
+		"parents": "Stock",
+		"icon": "fa fa-stack-overflow",
+		"links"		:	"stock",
+		"submenu": [
+			{
+				"title"		:	"",
+				"links"		:	"#home",
+                "tag" 		: 	"/home",
+				"url"		:	"home.html",
+				"controller":	"home"
+            },
+			{
+				"title"		:	"Add / Update Stock",
+				"links"		:	"#addstock",
+				"tag" 		: 	"/addstock",
+				"url"		:	"addstock.html",
+				"controller":	"stockinfo"
+			},
+			{
+				"title"		:	"",
+				"links"		:	"#uploadscancopy",
+                "tag" 		: 	"/uploadscancopy",
+				"url"		:	"uploadscancopy.html",
+				"controller":	"uploadscancopy"
+            },
+            {
+				"title"		:	"Stock List",
+				"links"		:	"#stocklist",
+                "tag" 		: 	"/stocklist",
+				"url"		:	"stocklist.html",
+				"controller":	"stockinfo"
+            }]
+    },
+	{
+		"parents": "main menu",
+		"icon": "fa fa-stack-overflow",
+		"links"		:	"stkreports",
+		"arrow" : "",
+		"submenu": [
+			{
+				"title"		:	"",
+				"links"		:	"#stkreports",
+                "tag" 		: 	"/stkreports",
+				"url"		:	"branchwise.html",
+				"controller":	"stkreports"
+            }
+		]
+    },
+    {
+		"parents": "Shipment",
+		"icon": "fa fa-book",
+		"links"		:	"shipment",
+        "submenu": [             
+            {
+				"title"		:	"Book / Track Shipment",
+				"links"		:	"#bookshipment",
+                "tag" 		: 	"/bookshipment",
+				"url"		:	"bookshipment.html",
+				"controller":	"shippinginfo"
+            },
+            {
+				"title"		:	"Inward List",
+				"links"		:	"#inwardlist",
+                "tag" 		: 	"/inwardlist",
+				"url"		:	"inwardlist.html",
+				"controller":	"shippinginfo"
+            },
+			{
+				"title"		:	"",
+				"links"		:	"#adshipidwiselist",
+                "tag" 		: 	"/adshipidwiselist",
+				"url"		:	"adshipidwiselist.html",
+				"controller":	"shippinginfo"
+            },
+            {
+				"title"		:	"",
+				"links"		:	"#trackshipment",
+                "tag" 		: 	"/trackshipment",
+				"url"		:	"trackshipment.html",
+				"controller":	"shippinginfo"
+            }]
+    }
+    
+	 
+]

@@ -1,0 +1,425 @@
+{
+  "name": "TicketMaster",
+  "plural": "TicketMaster",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {
+    "raiseticket": {
+      "accepts": [
+        {
+          "arg": "ticketinfo",
+          "type": "object",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/raiseTicket",
+          "verb": "post"
+        }
+      ]
+    },
+    "raiseindent": {
+      "accepts": [
+        {
+          "arg": "ticketinfo",
+          "type": "object",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/raiseIndent",
+          "verb": "post"
+        }
+      ]
+    },
+    "cmpwiseopentickets": {
+      "accepts": [
+        {
+          "arg": "campusname",
+          "type": "string",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/CampuswiseOpenTickets",
+          "verb": "get"
+        }
+      ]
+    },
+    "updateticketbyid": {
+      "accepts": [
+        {
+          "arg": "ticketinfo",
+          "type": "object",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/UpdateTicketbyId",
+          "verb": "post"
+        }
+      ]
+    },
+    "ticketdatainassets": {
+      "accepts": [
+        {
+          "arg": "campusname",
+          "type": "string",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/TicketDatainAssets",
+          "verb": "get"
+        }
+      ]
+    },
+    "getlatestticketinfo": {
+      "accepts": [
+        {
+          "arg": "assetid",
+          "type": "number",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/getLatestTicketInfo",
+          "verb": "get"
+        }
+      ]
+    },
+    "systemsworkingstatus": {
+      "accepts": [
+        {
+          "arg": "instname",
+          "type": "string",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/SystemsWorkingStatus",
+          "verb": "get"
+        }
+      ]
+    },
+    "totalticketdatainassets": {
+      "accepts": [],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/TotalTicketDatainAssets",
+          "verb": "get"
+        }
+      ]
+    },
+    "campusalltiketsgroupby": {
+      "accepts": [
+        {
+          "arg": "campusname",
+          "type": "string",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/CampusAllTiketsGroupby",
+          "verb": "get"
+        }
+      ]
+    },
+    "itemsbasedongroup": {
+      "accepts": [
+        {
+          "arg": "groupdata",
+          "type": "object",
+          "required": false,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/ItemsBasedonGroup",
+          "verb": "post"
+        }
+      ]
+    },
+    "computerstatusaltreport": {
+      "accepts": [
+        {
+          "arg": "allottedcampuses",
+          "type": "string",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/ComputerStatusaltReport",
+          "verb": "get"
+        }
+      ]
+    },
+    "computerstatusreportall": {
+      "accepts": [],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/ComputerStatusReport",
+          "verb": "get"
+        }
+      ]
+    },
+    "powerbackupstatusaltreport": {
+      "accepts": [
+        {
+          "arg": "allottedcampuses",
+          "type": "string",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/PowerBackupStatusaltReport",
+          "verb": "get"
+        }
+      ]
+    },
+    "ticketsbetweendates": {
+      "accepts": [
+        {
+          "arg": "startdate",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        {
+          "arg": "enddate",
+          "type": "string",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/TicketsBetweenDates",
+          "verb": "get"
+        }
+      ]
+    },
+    "ticketsbetweendatesbyalt": {
+      "accepts": [
+        {
+          "arg": "alloteddatefilter",
+          "type": "object",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/TicketsBetweenDatesbyAlt",
+          "verb": "post"
+        }
+      ]
+    },
+    "filtertitledatesintickets": {
+      "accepts": [
+        {
+          "arg": "filtertitledata",
+          "type": "object",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/FilterTitleDatesinTickets",
+          "verb": "post"
+        }
+      ]
+    },
+    "itemsgroupby": {
+      "accepts": [],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/itemsgroupby",
+          "verb": "get"
+        }
+      ]
+    }
+  }
+}

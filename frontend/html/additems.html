@@ -1,0 +1,213 @@
+
+    <div ng-app="stock" ng-controller="additems">
+        <!-- header logo: style can be found in header.less -->
+
+        <aside class="right-side">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1>
+                        Add / Update Stock
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li class="active">Add / Update Stock</li>
+                    </ol>
+                </section>
+        
+			
+
+                <!-- Main content -->
+                <section class="content">
+					
+                    		<div class="box box-primary">
+                                <div class="box-header">
+									<div class="row">
+										
+										<div class="col-md-3">
+											<h3 class="box-title">
+												<label>UNO</label>
+												<div class="input-group input-group-sm">
+													<input type="text" ng-model="unono" class="form-control" placeholder="Enter UNO No">
+													<span class="input-group-btn">
+														<button class="btn btn-info btn-flat" type="submit" ng-click="getunodata(unono)">Go</button>
+													</span>
+												</div>
+											</h3>
+										</div>
+									</div>
+									
+                                </div><!-- /.box-header -->
+                                <div class="box-body">
+									<form ng-submit="addAsset(stockitem)" method="post" name="frmDefault">
+										<div class="row">
+											<div class="col-md-3 form-group">
+												<label>Entry No</label>
+												<input type="text" ng-model="stockitem.stockEntryNo" class="form-control">
+											</div>
+											<div class="col-md-3 form-group">
+												<label>Item ID</label>
+												<input type="number" ng-model="stockitem.itItemId" class="form-control" disabled>
+											</div>
+											<div class="col-md-3 form-group" ng-init="InfraItems()">
+												<label>Select Item Group</label>
+												<select ng-model="stockitem.itemgroupname" class="form-control" ng-change="getitemname(stockitem.itemgroupname)" required>  
+													  <option value="">Select Item Group</option>  
+													  <option ng-repeat="x in itemslist" value="{{x.ititemgrpname}}">{{x.ititemgrpname}}</option>  
+												 </select>
+											</div>
+											<div class="col-md-3 form-group">
+												<label>Select Item Name</label>
+												<select ng-model="stockitem.itemname" class="form-control" required>  
+													  <option value="">Select Item Name</option>  
+													  <option ng-repeat="x in totalitems" value="{{x.ititemname}}">{{x.ititemname}}</option>  
+												 </select>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-3 form-group">
+												<label>Brand Name</label>
+												<input type="text" ng-model="stockitem.brandname" class="form-control">
+											</div>
+											<div class="col-md-3 form-group">
+												<label>Model No</label>
+												<input type="text" ng-model="stockitem.modelno" class="form-control">
+											</div>
+											<div class="col-md-3 form-group">
+												<label>Serial No</label>
+												<input type="text" ng-model="stockitem.serialno" class="form-control">
+											</div>
+											<div class="col-md-3 form-group">
+												<label>Mac ID</label>
+												<input type="text" ng-model="stockitem.macid" class="form-control">
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-9 form-group">
+												<label>Simple Configuration (if UNO Data not found)</label>
+												<input type="text" ng-model="stockitem.config" class="form-control">
+											</div>
+											<div class="col-md-3 form-group">
+												<button type="button" class="btn btn-primary btn-sm" style="margin-top: 24px;" data-toggle="modal" data-target="#lable" ng-click="Configlable(unono)">View (if UNO Found)</button>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-3 form-group" ng-init="ItemLocation()">
+												<label>Item Location</label>
+												<select ng-model="stockitem.assetlocationgroup" class="form-control" required>  
+													  <option value="">Select Location</option>  
+													  <option ng-repeat="x in locationslist" value="{{x.locationname}}">{{x.locationname}}</option>  
+												 </select>
+											</div>
+											<div class="col-md-3 form-group">
+												<label>Item Sub Location</label>
+												<input type="text" ng-model="stockitem.assetlocationname" class="form-control" placeholder="Item Sub Location" required/>
+											</div> 
+										</div>
+										<div class="row">
+											<div class="col-md-3 form-group" ng-init="getvendorslist()">
+												<label>Purchase From</label>
+												<select ng-model="stockitem.purchasefrom" class="form-control">  
+													  <option value="">Select Vendor</option>   
+													  <option ng-repeat="x in vendorslist" value="{{x.vname}}">{{x.vname}}</option>  
+												 </select>
+											</div>
+											<div class="col-md-3 form-group">
+												<label>Purchase Date</label>
+												<input type="date" ng-model="stockitem.purchasedate" class="form-control"/>
+											</div> 
+											<div class="col-md-3 form-group">
+												<label>Warranty Date</label>
+												<input type="date" ng-model="stockitem.warrantyupto" class="form-control"/>
+											</div> 
+										</div>
+										<button type="submit" ng-show="showsubmit==0" class="btn btn-primary">Submit</button>
+										<h3 class="text-center text-danger" ng-show="showsubmit==1">Please wait...</h3>
+									</form>
+									
+                                </div><!-- /.box-body -->
+
+                            </div>
+
+
+                </section>
+      </aside>     
+        
+  
+  
+
+
+	<div class="modal fade" id="lable" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" style="padding:0; margin:0;">
+            <img src="icons/sysconfig.jpg" class="card-img-top" width="100%" alt="...">
+			<div style="padding:15px;">
+              <h4>Desktop <span class="pull-right">{{campusname}} / {{data.itinfraitemdetailsid}} </span></h4>
+              <p><small>
+              <span>Serial: {{data.itinfraitemserialno}}</span>
+              <span class="pull-right">Model: {{data.itinfraitemmodelno}}</span>
+            </small></p>
+              
+              
+              <table class="table">
+                  <tr>
+                      <td> <img src="icons/icons8-processor-50.png" width="30px"></td>
+                        <td>{{fstring(data.itinfraitemsimplespec.cpu.manufacturer)}} {{fstring(data.itinfraitemsimplespec.cpu.brand)}} {{data.itinfraitemsimplespec.cpu.speed}} Ghz<br>
+                           <small>Cores : {{data.itinfraitemsimplespec.cpu.cores}}, Socket : {{data.itinfraitemsimplespec.cpu.socket}}</small>
+                        </td>
+                  </tr><tr>
+                        <td> <img src="icons/icons8-motherboard-50.png" width="30px"></td>
+                        <td>{{data.itinfraitemsimplespec.baseboard.manufacturer}} {{data.itinfraitemsimplespec.baseboard.model}}<br>
+                           <small>Serial : {{data.itinfraitemsimplespec.baseboard.serial}}, Version : {{data.itinfraitemsimplespec.baseboard.version}}</small>
+                        </td>
+                  </tr>
+                  <tr ng-repeat="x in data.itinfraitemsimplespec.mem">
+                    <td > <img src="icons/icons8-memory-slot-50.png" width="30px"></td>
+                    <td>{{x.size/(1024*1024*1024)}} GB {{x.type}} {{x.clockSpeed}} Ghz<br>
+                       <small>SN : {{x.serialNum}}, PN : {{x.partNum}}</small>
+                    </td>
+                </tr>
+                <tr ng-repeat="x in data.itinfraitemsimplespec.disk">
+                    <td> <img src="icons/icons8-hdd-50.png" width="30px"></td>
+                    <td>{{nformat(x.size/(1024*1024*1024))}} GB {{x.type}} {{x.interfaceType}}<br>
+                        <small>SN : {{x.serialNum}}, PN : {{x.name}}</small>
+                    </td>
+                </tr>
+                <tr>
+                    <td > <img src="icons/icons8-monitor-50.png" width="30px"></td>
+                    <td >{{data.itinfraitemdetailedspec.graphics.displays[0].model}}<br>
+                       <small>{{data.itinfraitemdetailedspec.graphics.displays[0].vendor}}</small>
+                    </td>
+                </tr>
+               
+                
+                <tr>
+                    <td> <img src="icons/icons8-video-card-50.png" width="30px"></td>
+                    <td>{{data.itinfraitemdetailedspec.graphics.controllers[0].model}} {{data.itinfraitemdetailedspec.graphics.controllers[0].vram/1024}} GB<br>
+                       <small>Vendor: {{data.itinfraitemdetailedspec.graphics.controllers[0].vendor}}</small>
+                    </td>
+                </tr>
+                <tr>
+                    <td><img src="icons/icons8-network-card-50.png" width="30px"></td>
+                    <td>{{data.itinfraitemdetailedspec.net[0].ifaceName}}<br>
+                       <small>MAC: {{data.itinfraitemdetailedspec.net[0].mac}} Speed: {{data.itinfraitemdetailedspec.net[0].speed}} Mbps</small>
+                    </td>
+                </tr><tr>
+                    <td> <img src="icons/icons8-c-drive-50.png" width="30px"></td>
+                    <td>{{data.itinfraitemdetailedspec.os.distro}} {{data.itinfraitemdetailedspec.os.arch}}<br>
+                       <small>Hostname: {{data.itinfraitemdetailedspec.os.hostname}}</small>
+                    </td>
+                </tr>
+              </table>
+              <a href="#" class="btn btn-primary pull-right">Service Status</a>
+			  <div style="clear:both"></div>
+        	</div>
+      </div>
+      
+    </div>
+  </div>
+
+
+
+    </div>

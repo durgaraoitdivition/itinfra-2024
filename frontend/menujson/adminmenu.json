@@ -1,0 +1,171 @@
+[
+    {
+		"parents": "User Management",
+		"icon": "fa fa-users",
+		"links"		:	"usermanagement",
+        "submenu": [             
+            {
+				"title"		:	"Add / Delete Users",
+				"links"		:	"#addusers",
+                "tag" 		: 	"/addusers",
+				"url"		:	"addusers.html",
+				"controller":	"userinfo"
+            },
+            {
+				"title"		:	"",
+				"links"		:	"#adminhome",
+                "tag" 		: 	"/adminhome",
+				"url"		:	"adminhome.html",
+				"controller":	"adminhome"
+            }]
+    },
+	{
+		"parents": "Campus Management",
+		"icon": "fa fa-building",
+		"links"		:	"campusmanagement",
+        "submenu": [             
+            {
+				"title"		:	"Add Campus",
+				"links"		:	"#campusinfo",
+                "tag" 		: 	"/campusinfo",
+				"url"		:	"campusinfo.html",
+				"controller":	"campusinfo"
+            }]
+    },
+	{
+		"parents": "Infra Items",
+		"icon": "fa fa-stack-overflow",
+		"links"		:	"addinfraitems",
+        "submenu": [             
+            {
+				"title"		:	"Add Items",
+				"links"		:	"#addinfraitems",
+                "tag" 		: 	"/addinfraitems",
+				"url"		:	"addinfraitems.html",
+				"controller":	"addinfraitems"
+            }]
+    },
+    {
+		"parents": "Tickets",
+		"icon": "fa fa-ticket",
+		"links"		:	"Tickets",
+        "submenu": [             
+            {
+				"title"		:	"Open Tickets",
+				"links"		:	"#adminpendingtickets",
+                "tag" 		: 	"/adminpendingtickets",
+				"url"		:	"adminpendingtickets.html",
+				"controller":	"adminpendingtickets"
+            },
+			{
+				"title"		:	"Campus wise report",
+				"links"		:	"#computerstatus",
+                "tag" 		: 	"/computerstatus",
+				"url"		:	"computerstatus.html",
+				"controller":	"computerstatus"
+            },
+			{
+				"title"		:	"Total Tickets",
+				"links"		:	"#totaltickets",
+                "tag" 		: 	"/totaltickets",
+				"url"		:	"totaltickets.html",
+				"controller":	"totaltickets"
+            },
+			{
+				"title"		:	"",
+				"links"		:	"#cmpopenticketreport",
+                "tag" 		: 	"/cmpopenticketreport",
+				"url"		:	"cmpopenticketreport.html",
+				"controller":	"cmpopenticketreport"
+            },
+			{
+				"title"		:	"",
+				"links"		:	"#getticketinfousingno",
+                "tag" 		: 	"/getticketinfousingno",
+				"url"		:	"getticketinfousingno.html",
+				"controller":	"getticketinfousingno"
+            }]
+    },
+	{
+		"parents": "Stock List",
+		"icon": "fa fa-stack-overflow",
+		"links"		:	"stocklist",
+        "submenu": [             
+            {
+				"title"		:	"Branch Wise",
+				"links"		:	"#branchwise",
+                "tag" 		: 	"/branchwise",
+				"url"		:	"branchwise.html",
+				"controller":	"stkreports"
+            },
+            {
+				"title"		:	"Item Wise",
+				"links"		:	"#itemwise",
+                "tag" 		: 	"/itemwise",
+				"url"		:	"itemwise.html",
+				"controller":	"stkreports"
+            },
+            {
+				"title"		:	"Spare Parts",
+				"links"		:	"#spareparts",
+                "tag" 		: 	"/spareparts",
+				"url"		:	"spareparts.html",
+				"controller":	"spareparts"
+            },
+			{
+				"title"		:	"Systems No Tick",
+				"links"		:	"#sysnotickets",
+                "tag" 		: 	"/sysnotickets",
+				"url"		:	"sysnotickets.html",
+				"controller":	"spareparts"
+            },
+			{
+				"title"		:	"",
+				"links"		:	"#itemsbasedongroup",
+				"tag" 		: 	"/itemsbasedongroup",
+				"url"		:	"itemsbasedongroup.html",
+				"controller":	"itemsbasedongroup"
+			},
+			{
+				"title"		:	"",
+				"links"		:	"#updatestock",
+				"tag" 		: 	"/updatestock",
+				"url"		:	"updatestock.html",
+				"controller":	"updatestock"
+			}]
+    },    
+	{
+		"parents": "Shipment",
+		"icon": "fa fa-book",
+		"links"		:	"shipment",
+        "submenu": [             
+            {
+				"title"		:	"Book / Track Shipment",
+				"links"		:	"#trackshipment",
+                "tag" 		: 	"/trackshipment",
+				"url"		:	"trackshipment.html",
+				"controller":	"shippinginfo"
+            },
+            {
+				"title"		:	"Inward List",
+				"links"		:	"#inwardlist",
+                "tag" 		: 	"/inwardlist",
+				"url"		:	"inwardlist.html",
+				"controller":	"inwordentry"
+            },
+			{
+				"title"		:	"",
+				"links"		:	"#adshipidwiselist",
+                "tag" 		: 	"/adshipidwiselist",
+				"url"		:	"adshipidwiselist.html",
+				"controller":	"shippinginfo"
+            },
+            {
+				"title"		:	"",
+				"links"		:	"#bookshipment",
+                "tag" 		: 	"/bookshipment",
+				"url"		:	"bookshipment.html",
+				"controller":	"shippinginfo"
+            }]
+    } 
+]

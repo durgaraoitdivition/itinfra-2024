@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Aditya | It Infrastructure</title>
+        <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+        <!-- bootstrap 3.0.2 -->
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <!-- font Awesome -->
+        <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <!-- Ionicons -->
+        <link href="css/ionicons.min.css" rel="stylesheet" type="text/css" />
+        <!-- Morris chart -->
+        <link href="css/morris/morris.css" rel="stylesheet" type="text/css" />
+        <!-- jvectormap -->
+        <link href="css/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+        <!-- Date Picker -->
+        <link href="css/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
+        <!-- Daterange picker -->
+        <link href="css/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
+        <!-- bootstrap wysihtml5 - text editor -->
+        <link href="css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="css/jquery.dataTables.css">
+        <!-- Theme style -->
+        <link href="css/AdminLTE.css" rel="stylesheet" type="text/css" />
+		 <!-- Loader Bar -->
+  		<link href='angular-loading-bar-master/src/loading-bar.css' rel='stylesheet' />
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+		
+        <script src="angular-1.4.8/angular.min.js" type="text/javascript"></script>
+        <script src="angular-1.4.8/angular-route.js" type="text/javascript"></script>
+<script src="angular-1.4.8/angular-base64.js" type="text/javascript"></script>
+		<script src="angular-1.4.8/angular-cookies.js"></script>
+		<script src="ocLazyLoad/dist/ocLazyLoad.js"></script>
+		<script src="controller/menu.js"></script>
+		<script src="angular-loading-bar-master/src/loading-bar.js"></script>
+		<script type="text/javascript">
+		function printfuntion() {
+				  window.print();
+				}
+		</script>
+		
+    </head>
+    <body class="skin-blue" ng-app="stock" ng-controller="menu">
+        <!-- header logo: style can be found in header.less -->
+
+        <header class="header" ng-init="Allottids()">
+            <a href="index.html" class="logo" >
+			 <img src="img/any_logo.png">
+			 <!--Stock-->
+                <!-- Add the class icon to your logo image or logo icon to add the margining -->
+               
+				 
+            </a>
+			
+			
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation </span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <div class="pull-left" ng-hide="userdata[0].usertype==1">
+                    <select ng-model="defaultid" style="margin-top: 8px;" class="form-control" ng-options="campus.id as campus.campusName for campus in allotedcmp" ng-change="campuchange(defaultid)"></select>
+                </div>
+                
+                <div class="navbar-right">
+                   
+                    <ul class="nav navbar-nav">
+                      <!-- <li class="dropdown messages-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                              <i class="fa fa-building"></i>
+                                <span class="label label-success">4</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <ul class="menu">
+                                        <li>
+                                            <a href="#">
+                                                <div class="pull-left">
+                                                    <img src="img/avatar3.png" class="img-circle" alt="User Image"/>
+                                                </div>
+                                                <h4>
+                                                    Support Team
+                                                    <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                                                </h4>
+                                                <p>Why not buy a new awesome theme?</p>
+                                            </a>
+                                        </li>
+                                        
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li> -->
+						<li>
+                            <a href="#"  title="Logout">
+                                 {{userdata[0].username}}
+                            </a>
+						</li>
+						<li>
+                            <a href="#" ng-click="logountnow()" title="Logout">
+                                <i class="fa fa-sign-out fa-lg"></i>
+                            </a>
+						</li>	
+                        
+                    </ul>
+                </div>
+            </nav>
+        </header>
+		 <div class="wrapper row-offcanvas row-offcanvas-left">
+            <!-- Left side column. contains the logo and sidebar -->
+          	<aside class="left-side sidebar-offcanvas">
+                <!-- sidebar: style can be found in sidebar.less -->
+              <section class="sidebar">
+               			
+				  <ul class="sidebar-menu">
+					<li class="active">		
+					  <a href="#home">
+						<i class="fa fa-dashboard"></i>
+						<span>Dashboard</span>           
+					  </a>   		  
+					</li>
+					
+					<li ng-repeat="x in mainmenu" ng-if="x.parents !=''"  class="treeview">
+						<a  href="{{x.links}}">
+							<i class="{{x.icon}}"></i>
+							<span>{{x.parents}}</span>
+							<i class="fa fa-angle-left pull-right"></i>
+						</a>
+						<ul class="treeview-menu">
+							<li ng-repeat="y in x.submenu" ng-if="y.title !=''"><a href="{{y.links}}"><i class="fa fa-angle-double-right"></i> {{y.title}}</a></li>
+						</ul>
+					</li>
+					
+					</ul>
+                </section>
+                <!-- /.sidebar -->
+            </aside>
+			
+          
+            <ng-view></ng-view>
+
+        </div><!-- ./wrapper -->
+
+
+        <!-- jQuery 2.0.2 -->
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery.dataTables.min.js"></script>
+        
+
+        <!-- jQuery UI 1.10.3 -->
+        <script src="js/jquery-ui-1.10.3.min.js" type="text/javascript"></script>
+        <!-- Bootstrap -->
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>
+        <!-- Morris.js charts -->
+		 <!-- DATA TABES SCRIPT -->
+         
+        <!-- AdminLTE App -->
+        <script src="js/AdminLTE/app.js" type="text/javascript"></script>
+        <!-- <script type="text/javascript">
+            $(function() {
+                $("#example1").dataTable();
+                $('#example2').dataTable({
+                    "bPaginate": true,
+                    "bLengthChange": false,
+                    "bFilter": false,
+                    "bSort": true,
+                    "bInfo": true,
+                    "bAutoWidth": false
+                });
+            });
+        </script> -->
+
+    </body>
+</html>
