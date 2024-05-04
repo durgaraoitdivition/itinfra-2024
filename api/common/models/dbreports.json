@@ -252,14 +252,8 @@
     "updatercvstatus": {
       "accepts": [
         {
-          "arg": "AdShipId",
-          "type": "string",
-          "required": true,
-          "description": ""
-        },
-        {
-          "arg": "Received",
-          "type": "number",
+          "arg": "statusupdate",
+          "type": "object",
           "required": true,
           "description": ""
         }
@@ -554,6 +548,68 @@
       "http": [
         {
           "path": "/repairedcount",
+          "verb": "post"
+        }
+      ]
+    },
+    "itemwiseinoutward": {
+      "accepts": [
+        {
+          "arg": "shipmentType",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        {
+          "arg": "instId",
+          "type": "number",
+          "required": true,
+          "description": ""
+        },
+        {
+          "arg": "CampusName",
+          "type": "string",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/itemwiseinoutward",
+          "verb": "post"
+        }
+      ]
+    },
+    "inoutsitemwise": {
+      "accepts": [
+        {
+          "arg": "inoutfilter",
+          "type": "object",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "res",
+          "type": "any",
+          "root": true,
+          "description": ""
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/inoutsitemwise",
           "verb": "post"
         }
       ]

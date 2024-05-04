@@ -46,9 +46,10 @@ module.exports = function(Dbreports)
 	
 	Dbreports.getuserinfo = function(CampusId,callback) {
 		const dataSource=Dbreports.app.datasources.mysql;
-		dataSource.connector.execute("select * from ItInfraUsers where CONCAT(',', CampusId, ',') like '%,"+CampusId+",%'",(err,res)=>{
+		console.log("select * from ItInfraUsers where CONCAT(',', CampusId, ',') like '%,"+CampusId+",%' and status=1")
+		dataSource.connector.execute("select * from ItInfraUsers where CONCAT(',', CampusId, ',') like '%,"+CampusId+",%' and status=1",(err,res)=>{
 		//dataSource.connector.execute("select * from ItInfraUsers where CampusId IN ("+CampusId+")",(err,res)=>{
-			//console.log(res);
+			console.log(res);
 			callback(null, res);
 		})
    
@@ -73,12 +74,14 @@ module.exports = function(Dbreports)
    
   	};
 	
-	Dbreports.updatercvstatus = function(AdShipId,Received,callback) {
+	Dbreports.updatercvstatus = function(statusupdate,callback) {
 		const dataSource=Dbreports.app.datasources.mysql;
 		//console.log(AdShipId, Received);
-		dataSource.connector.execute("update ItInfraShipment set Received="+Received+", ReceivedDate=now() where ADSHPid="+AdShipId+"",(err,res)=>{
+		dataSource.connector.execute("update ItInfraShipment set Received="+statusupdate.Received+", ReceivedDate=now() where ADSHPid="+statusupdate.AdShipId+"",(err,res)=>{
 			//console.log(res);
-			callback(null, res);
+			dataSource.connector.execute("insert ignore into receiverDetails (name, email, phoneNo, currentDate, shipmentId) values ('"+statusupdate.name+"', '"+statusupdate.email+"', '"+statusupdate.phoneNo+"', now(), '"+statusupdate.AdShipId+"')",(err,res)=>{
+				callback(null, res);
+			})	
 		})
    
   	};
@@ -300,6 +303,34 @@ module.exports = function(Dbreports)
 				callback(null, res);
 			})
 		}
+   
+  	};
+
+	Dbreports.itemwiseinoutward = function(shipmentType, instId, CampusName, callback) {
+		const dataSource=Dbreports.app.datasources.mysql;
+		if(instId==0 && CampusName=="All"){
+			var qry = "select ItemGroup, ItemName, sum(Quantity) as count, shipmentType from ItInfraShipment where shipmentType='"+shipmentType+"' group by ItemGroup, ItemName order by ItemGroup"
+		} else {
+			var qry = "select InstId, CampusName, ItemGroup, ItemName, sum(Quantity) as count, shipmentType from ItInfraShipment where shipmentType='"+shipmentType+"' and InstId="+instId+" and CampusName='"+CampusName+"' group by ItemGroup, ItemName order by ItemGroup"
+		}
+		dataSource.connector.execute(qry,(err,res)=>{
+			//console.log(res);
+			callback(null, res);
+		})
+   
+  	};
+
+	Dbreports.inoutsitemwise = function(inoutfilter, callback) {
+		const dataSource=Dbreports.app.datasources.mysql;
+		if(inoutfilter.instId==0 && inoutfilter.CName=="All"){
+			var qry = "select * from ItInfraShipment where shipmentType='"+inoutfilter.sType+"' and ItemGroup='"+inoutfilter.ItGrp+"' and ItemName='"+inoutfilter.ItName+"'"
+		} else {
+			var qry = "select * from ItInfraShipment where shipmentType='"+inoutfilter.sType+"' and InstId="+inoutfilter.instId+" and CampusName='"+inoutfilter.CName+"'  and ItemGroup='"+inoutfilter.ItGrp+"' and ItemName='"+inoutfilter.ItName+"'"
+		}
+		dataSource.connector.execute(qry,(err,res)=>{
+			//console.log(res);
+			callback(null, res);
+		})
    
   	};
 };

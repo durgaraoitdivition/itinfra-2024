@@ -167,5 +167,40 @@
 				"url"		:	"bookshipment.html",
 				"controller":	"shippinginfo"
             }]
+    },
+	{
+		"parents": "Reports",
+		"icon": "fa fa-book",
+		"links"		:	"reports",
+        "submenu": [             
+            {
+				"title"		:	"Campus In/Outwards",
+				"links"		:	"#campusinoutwards",
+                "tag" 		: 	"/campusinoutwards",
+				"url"		:	"campusinoutwards.html",
+				"controller":	"campusinoutwards"
+            },
+			{
+				"title"		:	"",
+				"links"		:	"#inoutitemwise",
+                "tag" 		: 	"/inoutitemwise",
+				"url"		:	"inoutitemwise.html",
+				"controller":	"inoutitemwise"
+            },
+			{
+				"title"		:	"Date Range In/Outwards",
+				"links"		:	"#daterangeinoutwards",
+                "tag" 		: 	"/daterangeinoutwards",
+				"url"		:	"daterangeinoutwards.html",
+				"controller":	"daterangeinoutwards"
+            },
+			{
+				"title"		:	"",
+				"links"		:	"#itemsbtndates",
+                "tag" 		: 	"/itemsbtndates",
+				"url"		:	"itemsbtndates.html",
+				"controller":	"itemsbtndates"
+            }
+		]
     } 
 ]

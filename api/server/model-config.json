@@ -110,5 +110,9 @@
   "Indent": {
     "dataSource": "mysql",
     "public": true
+  },
+  "Receiverdetails": {
+    "dataSource": "mysql",
+    "public": true
   }
 }

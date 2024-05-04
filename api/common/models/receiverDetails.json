@@ -1,22 +1,22 @@
 {
-  "name": "Itinfrausers",
+  "name": "Receiverdetails",
   "options": {
     "idInjection": false,
     "mysql": {
-      "schema": "ItInfrastructure",
-      "table": "ItInfraUsers"
+      "schema": "itinfra",
+      "table": "receiverDetails"
     }
   },
   "properties": {
-    "userid": {
+    "id": {
       "type": "Number",
-      "id": 1,
       "required": true,
       "length": null,
       "precision": 10,
       "scale": 0,
+      "id": 1,
       "mysql": {
-        "columnName": "userId",
+        "columnName": "id",
         "dataType": "int",
         "dataLength": null,
         "dataPrecision": 10,
@@ -24,14 +24,14 @@
         "nullable": "N"
       }
     },
-    "username": {
+    "name": {
       "type": "String",
       "required": false,
       "length": 50,
       "precision": null,
       "scale": null,
       "mysql": {
-        "columnName": "userName",
+        "columnName": "name",
         "dataType": "varchar",
         "dataLength": 50,
         "dataPrecision": null,
@@ -39,59 +39,29 @@
         "nullable": "Y"
       }
     },
-    "useremail": {
+    "email": {
       "type": "String",
       "required": false,
-      "length": 50,
+      "length": 80,
       "precision": null,
       "scale": null,
       "mysql": {
-        "columnName": "userEmail",
+        "columnName": "email",
         "dataType": "varchar",
-        "dataLength": 50,
+        "dataLength": 80,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "Y"
       }
     },
-    "userphone": {
-      "type": "String",
-      "required": false,
-      "length": 20,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "userPhone",
-        "dataType": "varchar",
-        "dataLength": 20,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      }
-    },
-    "userpwd": {
-      "type": "String",
-      "required": false,
-      "length": 50,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "UserPwd",
-        "dataType": "varchar",
-        "dataLength": 50,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      }
-    },
-    "campusid": {
+    "phoneNo": {
       "type": "String",
       "required": false,
       "length": 30,
       "precision": null,
       "scale": null,
       "mysql": {
-        "columnName": "CampusId",
+        "columnName": "phoneNo",
         "dataType": "varchar",
         "dataLength": 30,
         "dataPrecision": null,
@@ -99,54 +69,50 @@
         "nullable": "Y"
       }
     },
-    "usertype": {
-      "type": "Number",
+    "status": {
+      "type": "String",
       "required": false,
-      "length": null,
-      "precision": 3,
-      "scale": 0,
+      "length": 30,
+      "precision": null,
+      "scale": null,
       "mysql": {
-        "columnName": "UserType",
-        "dataType": "tinyint",
-        "dataLength": null,
-        "dataPrecision": 3,
-        "dataScale": 0,
+        "columnName": "status",
+        "dataType": "varchar",
+        "dataLength": 30,
+        "dataPrecision": null,
+        "dataScale": null,
         "nullable": "Y"
       }
     },
-    "userLevel": {
+    "currentDate": {
+      "type": "Date",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "currentDate",
+        "dataType": "datetime",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      }
+    },
+    "shipmentId": {
       "type": "String",
       "required": false,
       "length": 20,
       "precision": null,
       "scale": null,
       "mysql": {
-        "columnName": "userLevel",
+        "columnName": "shipmentId",
         "dataType": "varchar",
         "dataLength": 20,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "Y"
       }
-    },
-    "status": {
-      "type": "Number",
-      "required": false,
-      "length": null,
-      "precision": 3,
-      "scale": 0,
-      "mysql": {
-        "columnName": "UserType",
-        "dataType": "tinyint",
-        "dataLength": null,
-        "dataPrecision": 3,
-        "dataScale": 0,
-        "nullable": "N"
-      }
     }
-  },
-  "validations": [],
-  "relations": {},
-  "acls": [],
-  "methods": {}
+  }
 }

@@ -1,0 +1,26 @@
+{
+  "name": "ItInfra",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "form-data": "^4.0.0",
+    "mysql": "^2.18.1",
+    "node-fetch": "^2.6.5",
+    "nodemailer": "^6.6.3",
+    "nodemon": "^2.0.9"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}

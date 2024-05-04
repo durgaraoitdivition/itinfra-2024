@@ -1,0 +1,100 @@
+#d-wrapper {
+  background-color: #fff;
+}
+#d-wrapper * {
+  margin: 0;
+  padding: 0;
+}
+
+#d-wrapper div.sep {
+  min-height: 200px;
+  padding: 32px 0;
+}
+
+#d-wrapper .zig-zag-top:before {
+  background: linear-gradient(
+      -45deg,
+      #1ba1e2 16px,
+      red 16px,
+      blue 16px,
+      transparent 0
+    ),
+    linear-gradient(45deg, #1ba1e2 16px, transparent 0);
+  background-position: left top;
+  background-repeat: repeat-x;
+  background-size: 22px 32px;
+  content: " ";
+  display: block;
+
+  height: 32px;
+  width: 100%;
+
+  position: relative;
+  bottom: 64px;
+  left: 0;
+}
+
+
+#d-wrapper .zig-zag-bottom {
+  margin: 0 0;
+  margin-top: 0;
+  background: #ffffff;
+}
+
+#d-wrapper .zig-zag-top {
+  margin: 0 0;
+  margin-bottom: 0;
+  background: #ffffff;
+}
+
+#d-wrapper .zig-zag-bottom,
+#d-wrapper .zig-zag-top {
+  padding: 0;
+}
+
+
+
+#d-wrapper div.sep p,
+#d-wrapper div.sep h1 {
+  text-shadow: 1px 1px 0 #888, 2px 2px 0 #888, 3px 3px 0 #888, 4px 4px 0 #888,
+    5px 5px 0 #888;
+  color: #fff;
+}
+
+#d-wrapper h1 {
+  font-size: 4em;
+}
+
+#d-wrapper .zig-zag-bottom:after {
+  background: linear-gradient(-45deg, transparent 16px, #ffffff 0),
+    linear-gradient(45deg, transparent 16px, #ffffff 0);
+  background-repeat: repeat-x;
+  background-position: left bottom;
+  background-size: 22px 32px;
+  content: "";
+  display: block;
+
+  width: 100%;
+  height: 32px;
+
+  position: relative;
+  top: 32px;
+  left: 0px;
+}
+
+#d-wrapper p {
+  text-align: center;
+}
+
+#d-wrapper p:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+p {
+  text-align: center;
+}
+.auth {
+  text-decoration: overline;
+  color: #999;
+  font-size: 2em;
+}

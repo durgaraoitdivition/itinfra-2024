@@ -1,8 +1,9 @@
-angular.module('stock').controller('shippinginfo',function($scope,$http,$filter, $cookies,$window,$route,$rootScope,apiurl, analysiapi){
+angular.module('stock').controller('shippinginfo',function($scope,$http,$filter,$timeout, $cookies,$window,$route,$rootScope,apiurl, analysiapi, itnodeapi){
 
 
 			var apiurl = apiurl.getUrl();
 			var analysis = analysiapi.getUrl();
+			var itinfra = itnodeapi.getUrl();
 			$scope.adshipid=$route.current.params.adshipid;
 			
 			// console.log($scope.userdata[0]);
@@ -70,44 +71,20 @@ angular.module('stock').controller('shippinginfo',function($scope,$http,$filter,
 		
 		//console.log($scopefinalres.userdata);
 		$scope.addItems = function (obj) {
-			//Add the new item to the Array.
-			$http.get(apiurl+"dbreports/LastShipId").success(function(data){
-				// console.log(data);
-				$scope.lastshipid = parseInt(data[0].ADSHPid);
-				$http.get(apiurl+"ItInfraCampusMasters?filter=%7B%22where%22%3A%7B%22campusName%22%3A%22"+obj.campusname+"%22%7D%7D").success(function(cinfo){
-					// console.log(cinfo);
-					$scope.todetail = cinfo;
-					$http.get(apiurl+"dbreports/UserInfobyCPid?CampusId="+cinfo[0].id).success(function(userinfo){
-						console.log(userinfo);
-						$scope.tonumber = userinfo.filter(e=>e.UserType==2);
-						var additem = {
-							/*SNo: $scope.sippeditems.length+1,*/
-							shipid : 0,
-							neworold : obj.neworold,
-							adshpid : $scope.lastshipid+1,
-							campusid : cinfo[0].id,
-							instid : obj.instid,
-							campusname : obj.campusname,
-							itemgroup : obj.ititemgroup,
-							itemname : obj.ititemname,
-							quantity : obj.qunatityNo,
-							senderCampusId : $scope.defaultid,
-							senderid : $scope.userdata[0].userid,
-							SenderName: $scope.allotedcmp[0].campusName,
-							ReceiverId : userinfo[0].userId,
-							useremail : userinfo[0].userEmail,
-							userphone : userinfo[0].userPhone,
-							currentdate : new Date(),
-							receiveddate : null
-						};
-						$scope.sippeditems.push(additem);
-						$scope.it.qunatityNo = 0;
-						$scope.it.ititemgroup = '';
-						$scope.it.ititemname = '';
-						//console.log($scope.sippeditems);
-					});	
-				});
-			});
+			console.log(obj)
+			var additem = {
+				neworold : obj.neworold,
+				// instid : obj.instid,
+				// campusname : obj.campusname,
+				itemgroup : obj.ititemgroup,
+				itemname : obj.ititemname,
+				quantity : obj.qunatityNo
+			};
+			$scope.sippeditems.push(additem);
+			$scope.it.qunatityNo = 0;
+			$scope.it.ititemgroup = '';
+			$scope.it.ititemname = '';
+			//console.log($scope.sippeditems);
 		}
 
 		$scope.removeRow = function (index) {
@@ -119,52 +96,29 @@ angular.module('stock').controller('shippinginfo',function($scope,$http,$filter,
 			}
 		}
 		
-		$scope.itemssubmit = function(itm,crf){
-			console.log(itm);
-			///itm.forEach(function(v){ delete v.SNo });campusName
-			
-			for(var i=0; i<itm.length; i++){
-				itm[i].couriername =  crf.couriername;
-				itm[i].crrefno =  crf.crrefno;
-				itm[i].shipmentmsg = crf.infomsg;
-			}
-			
-			
-			
-			$http.post(apiurl+"ItInfraShipments",itm).success(function(data){
-						
-				// $http.post("stkmail.php",itm).success(function(data){
-				// 	console.log(data);	
-					
-				// });
-				// window.location.href = "index.html#/trackshipment"
-				$scope.tonumber = $scope.tonumber.filter(e=>e.UserType==2)
-				// var userPhones = $scope.tonumber.map(entry => entry.userPhone);
-				// var userPhonesStr = userPhones.join(',');
-				// if($scope.todetail[0].campusPhone!=null){
-				// 	userPhonesStr = userPhonesStr+','+$scope.todetail[0].campusPhone
-				// }
-				let userPhonesStr = $scope.todetail[0].campusPhone.replace(/\s/g, '')
-				$http.get(apiurl+"ItInfraCampusMasters?filter=%7B%22where%22%3A%7B%22id%22%3A%22"+$scope.userdata[0].campusid+"%22%7D%7D").success(function(frominfo){
-					if(crf.couriername=='Our Staff'){
-						var crnewname = crf.couriername+' '+crf.crrefno
-					} else {
-						var crnewname = crf.couriername;
-					}
-				let smsobj  = {
-					"mobile": userPhonesStr,
-					"senderid": "ADIACY",
-					"message": "Your computer indent No:"+itm[0].adshpid+" Shipped to "+$scope.todetail[0].campusName+" through "+crnewname+" - from "+frominfo[0].campusName+" -ADITYA."
-					// "message": "The Parcel Shipped to "+$scope.todetail[0].campusName+" with Track No:"+itm[0].adshpid+" through "+crf.couriername+" from "+frominfo[0].campusName+"-ADITYA"
+		$scope.itemssubmit = function(itm,courier){
+			// console.log($scope.it.campusid)
+			var rcvcampusfilter = $scope.campusinfo.filter(e=>e.id==$scope.it.campusid);
+			// console.log(rcvcampusfilter, rcvcampusfilter[0].campusName)
+			if(rcvcampusfilter.length>0){
+				$scope.userdata[0].campusName = $scope.campusinfo.filter(e=>e.id==$scope.userdata[0].campusid)[0].campusName
+				var finalobj = {
+					items:itm,
+					sender : $scope.userdata,
+					rcvcampusId : $scope.it.campusid,
+					rcvcampusName:rcvcampusfilter[0].campusName,
+					instId : $scope.it.instid,
+					courier
 				}
-				// console.log(smsobj)
-				$scope.sendshipsms(smsobj);
-				window.location.href = "index.html#/trackshipment"
-				})
-			});
+				$http.post(itinfra+"order/create", finalobj).success(function(data){
+					// console.log(data)
+					location.reload()
+				});
+			}
 			
 		}
 		$scope.printdiv = (branch, sendercmpid, shipid, couriername) =>{
+			console.log(branch, sendercmpid, shipid, couriername)
 			// console.log(sendercmpid);
 			$http.get(apiurl+"ItInfraCampusMasters?filter=%7B%22where%22%3A%7B%22campusName%22%3A%22"+branch+"%22%7D%7D").success(function(cinfo){
 				// console.log(cinfo);
@@ -193,9 +147,13 @@ angular.module('stock').controller('shippinginfo',function($scope,$http,$filter,
 			});
 			
 		}
-		
-		$scope.shippinglist = function(){
-				$http.get(apiurl+"ItInfraShipments?filter=%7B%22where%22%3A%7B%22senderCampusId%22%3A%22"+$scope.userdata[0].campusid+"%22%7D%7D").success(function(data){
+		var dataTable;
+		$scope.shippinglist = function(val, title){
+				$scope.titleName = title;
+				if (dataTable) {
+					dataTable.DataTable().destroy();
+				}
+				$http.get(apiurl+"Itinfrashipments?filter=%7B%22where%22%3A%7B%22senderCampusId%22%3A%22"+$scope.userdata[0].campusid+"%22%2C%20%22received%22%3A%22"+val+"%22%7D%7D").success(function(data){
 							console.log(data);
 							$scope.shiplist = data;
 							if($scope.userdata[0].username!='admin'){
@@ -222,6 +180,7 @@ angular.module('stock').controller('shippinginfo',function($scope,$http,$filter,
 										  uniqcount = uniqcount+$scope.shiplist[i].quantity;
 										  CampusId = $scope.shiplist[i].campusid;
 										  branch = $scope.shiplist[i].campusname;
+										  senderCampus = $scope.shiplist[i].SenderName;
 										  senderCampusId = $scope.shiplist[i].senderCampusId;
 										  crrefno = $scope.shiplist[i].crrefno;
 										  curdate = $scope.shiplist[i].currentdate;
@@ -238,6 +197,7 @@ angular.module('stock').controller('shippinginfo',function($scope,$http,$filter,
 									"Branch": branch,
 									"CampusId": CampusId,
 									"senderCampusId" : senderCampusId,
+									"senderCampus" : senderCampus,
 									"Shipmentid": $scope.unqshipids[x],
 									"Itemcount" : uniqcount,
 									"CurPickId" : crrefno,
@@ -248,8 +208,23 @@ angular.module('stock').controller('shippinginfo',function($scope,$http,$filter,
 								}
 							
 							}
-							
-							
+							$timeout(function() {
+								//$("#noCampaignData").hide();
+								var rowCount = $("#inoutdata tr").length;
+								//console.log("Row count value is"+rowCount);
+								if (rowCount >= 0) {
+								  // console.log("Entered into Sorting");
+								  dataTable = $("#inoutdata").dataTable({
+										"bPaginate": true,
+										"bLengthChange": true,
+										"bFilter": true,
+										"bSort": true,
+										"bInfo": true,
+										"bAutoWidth": true,
+										"iDisplayLength": 50 // Set the number of rows per page to 50
+								   });
+								}
+							 }, 400)
 					
 							//console.log($scope.finalsplist);
 							
@@ -360,10 +335,9 @@ angular.module('stock').controller('shippinginfo',function($scope,$http,$filter,
 			//var obj = "adshipid="+adid+"&curshipid="+cuid;
 			var obj = {"adshipid":itemdata.Shipmentid,"curshipid":itemdata.curid}
 			//console.log(obj);
-			$http.post(apiurl+"dbreports/UpdateCid",obj).success(function(data){
-				//console.log('success');
-				$scope.shipmentsms(itemdata, 'In Transit')
-				location.reload();
+			$http.post(itinfra+"order/updatecourierno",obj).success(function(data){
+				console.log(data);
+				// location.reload();
 			});
 		}
 		
@@ -399,6 +373,38 @@ angular.module('stock').controller('shippinginfo',function($scope,$http,$filter,
 				//    location.reload()
 			   });
 			
+		}
+
+		$scope.shipsmsclick = (info) =>{
+			$scope.orderDetails = info;
+			$http.get(itinfra+"order/receivers/"+info.Shipmentid).success(function(data){
+				// console.log(data)
+				$scope.receiversdata = data;
+			})
+		}
+
+		$scope.re_send_sms = (rcdata) =>{
+			if(rcdata!=undefined && rcdata.recieverName!=undefined && rcdata.recieverMobile!=undefined){
+				var newuser = [{
+					name : rcdata.recieverName,
+					phoneNo : rcdata.recieverMobile,
+					designation : rcdata.recieverDesignation
+				}]
+				// $scope.receiversdata.push(newuser);
+			} else {
+				var newuser = []
+			}
+			var smsobj = {
+                shipmentId : $scope.orderDetails.Shipmentid, 
+				crrefno : $scope.orderDetails.CurPickId,
+                orderInfo:$scope.orderDetails,
+				newreciever : newuser
+            }
+			// console.log(smsobj)
+			$http.post(itinfra+"order/resendsms",smsobj).success(function(data){
+				// console.log(data);
+				location.reload();
+			});
 		}
 	
 			$scope.examdatechange = function(dt)

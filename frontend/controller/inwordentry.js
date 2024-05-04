@@ -1,7 +1,8 @@
-angular.module('stock').controller('inwordentry',function($scope,$http,$filter, $cookies,$window,$route,$rootScope,apiurl){
+angular.module('stock').controller('inwordentry',function($scope,$http,$filter, $cookies,$window,$route,$rootScope,apiurl, itnodeapi){
 
 
     var apiurl = apiurl.getUrl();
+    var itinfra = itnodeapi.getUrl();
     
     $scope.adshipid=$route.current.params.adshipid;
     
@@ -340,10 +341,19 @@ $scope.updatecrid = function(itemdata){
 }
 
 $scope.updatercvstatus = function(orderinfo){
-    var obj = {"AdShipId":orderinfo.Shipmentid,"Received":1}
-    //console.log(obj);
-    $http.post(apiurl+"dbreports/UpdateRcvStatus",obj).success(function(data){
-        //console.log('success');
+    var statusupdate = {
+        "Shipmentid" : orderinfo.Shipmentid,
+        "Received":1,
+        "status" : 'Received',
+        "name": $scope.userdata[0].username,
+        "email": $scope.userdata[0].useremail,
+        "phoneNo": $scope.userdata[0].userphone,
+        "designation" : $scope.userdata[0].userLevel,
+        "orderDetails" : orderinfo
+    }
+    // console.log(orderinfo, statusupdate)
+    $http.post(itinfra+"order/updatestatus",statusupdate).success(function(data){
+        // console.log(data);
         location.reload();
     });
 }

@@ -43,8 +43,8 @@ app.config(function ($httpProvider) {
 		}
 	})	
  app.service('apiurl', function () {
-    //    var apipath = 'http://10.70.3.229:3002/api/';
-		 var apipath = 'https://apis.aditya.ac.in/itinfra/';
+       var apipath = 'http://10.70.3.73:3002/api/';
+		//  var apipath = 'https://apis.aditya.ac.in/itinfra/';
 		return {
 			getUrl: function() {
 				return apipath;
@@ -53,16 +53,27 @@ app.config(function ($httpProvider) {
 		
     });
 
-app.service('analysiapi', function () {
-		// var analysis = 'http://10.60.1.9:3006/api/';
-		var analysis = 'https://apis.aditya.ac.in/analysis/';
+app.service('itnodeapi', function () {
+		var itnodeapi = 'http://10.70.3.73:6600/';
+		// var itnodeapi = 'http://10.60.1.9:6600/';
+		// var itnodeapi = 'https://apis.aditya.ac.in/itinfra24/';
+		return {
+			getUrl: function() {
+				return itnodeapi;
+			}
+		}
+		 
+	 });
+	 app.service('analysiapi', function () {
+		var analysis = 'http://10.60.1.9:3006/api/';
+		// var analysis = 'https://apis.aditya.ac.in/analysis/';
 		return {
 			getUrl: function() {
 				return analysis;
 			}
 		}
 		 
-	 });
+	 });	 
 
 	app.directive('demoFileModel', function ($parse) {
         return {
@@ -158,6 +169,23 @@ app.service('analysiapi', function () {
 		$routeProviderReference = $routeProvider;
 	});
 
+	app.directive('datepicker', function() {
+        return {
+            restrict: 'A',
+            require: 'ngModel',
+            link: function(scope, element, attrs, ngModelCtrl) {
+                $(element).datepicker({
+                    format: 'yyyy-mm-dd', // Specify your desired date format
+                    autoclose: true,
+                    todayHighlight: true
+                }).on('changeDate', function(e) {
+                    scope.$apply(function() {
+                        ngModelCtrl.$setViewValue(e.format('yyyy-mm-dd'));
+                    });
+                });
+            }
+        };
+    });
 
 app.controller('menu', function($scope,$http,$window, $filter, apiurl, analysiapi){
 

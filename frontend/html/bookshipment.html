@@ -51,9 +51,9 @@
 											</div>
 											<div class="col-md-4 form-group">
 												<label>Select Campus</label>
-												<select ng-model="it.campusname" class="form-control" required>  
+												<select ng-model="it.campusid" class="form-control" required>  
 													  <option value="">Select Campus</option>  
-													  <option ng-repeat="x in getcampuslist | orderBy :'instId'" value="{{x.campusName}}">{{x.campusName}}</option>  
+													  <option ng-repeat="x in getcampuslist | orderBy :'instId'" value="{{x.id}}">{{x.campusName}}</option>  
 												 </select> 
 											</div>
 										</div>
@@ -184,7 +184,7 @@
 										<!--{{sippeditems | json}}-->
 									<form method="post" name="shipping" ng-submit="itemssubmit(sippeditems,crf)" class="hidden-print">	
 										<div class="row">
-											<div class="col-md-4">
+											<div class="col-md-6">
 												<div class="form-group">
 													<label>Select Courier</label>
 													<select ng-model="crf.couriername" class="form-control" required>  
@@ -205,7 +205,19 @@
 											</div>	
 											<div class="col-md-6 form-group">
 												<label>Message</label>
-												<textarea ng-model="crf.infomsg" rows="5" class="form-control" required></textarea>
+												<textarea ng-model="crf.shipmentmsg" rows="5" class="form-control" required></textarea>
+											</div>
+											<div class="col-md-4 form-group">
+												<label>Reciever Name</label>
+												<input type="text" ng-model="crf.recieverName" class="form-control" />
+											</div>
+											<div class="col-md-4 form-group">
+												<label>Reciever MobileNo</label>
+												<input type="number" ng-model="crf.recieverMobile" class="form-control" />
+											</div>
+											<div class="col-md-4 form-group">
+												<label>Reciever Designation</label>
+												<input type="text" ng-model="crf.recieverDesignation" class="form-control" />
 											</div>
 											<div class="col-md-2 form-group"><br /><br />
 												<input type="submit" class="btn btn-primary" value="Submit" />

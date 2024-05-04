@@ -1,0 +1,95 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>ITINFRA TICKETS | Aditya Educational Institutions</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <link href="./css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <!--<script src="./excellentexport.js"></script>-->
+    <script src="./received.js"></script>
+    <link href="css/AdminLTE.css" rel="stylesheet" type="text/css" />
+    <style>
+        h2 {
+            font-size: 16px;
+        }
+
+        h4 {
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body ng-app="itinfra" ng-controller="report">
+    <div class="container" style="font-size: 14px;">
+        <!-- {{orderdata | json}} -->
+        
+            <div class="row mt-4">
+                <div class="col-md-6 form-group">
+                    <h2><strong>To</strong></h2>
+                    <h4>{{orderdata.reciever[0].InstName}} <br />{{orderdata.reciever[0].campus_address}} <br />
+                        {{orderdata.reciever[0].campus_city}} <br /> Contact Number :
+                        {{orderdata.reciever[0].campus_phone}}</h4>
+                </div>
+            
+                <div class="col-md-6 form-group">
+                    <h2><strong>From</strong></h2>
+                    <h4>{{orderdata.sender[0].InstName}} <br />{{orderdata.sender[0].campus_address}} <br />
+                        {{orderdata.sender[0].campus_city}} <br /> Contact Number : {{orderdata.sender[0].campus_phone}}
+                    </h4>
+                </div>
+            </div>
+        <br />
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th colspan="5">{{examdatechange(orderdata.orderDetails[0].CurrentDate) | date : 'dd-MM-y'}} <span
+                            style="float: right;">#{{orderdata.orderDetails[0].ADSHPid}}</span></th>
+                </tr>
+                <tr>
+                    <th>#</th>
+                    <th>Item Group</th>
+                    <th>Item Name</th>
+                    <th>Qunatity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in orderdata.orderDetails">
+                    <td>{{$index+1}}</td>
+                    <td>{{item.ItemGroup}}</td>
+                    <td>{{item.ItemName}}</td>
+                    <td>{{item.Quantity}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- <h4>Courier Pickup By : {{orderdata.orderDetails[0].CourierName}}.</h4> -->
+
+        <div class=" text-center">
+            <button type="button" ng-if="orderdata.orderDetails[0].Received==0" class="btn btn-primary mt-4" ng-click="submitRecieved(userid)">Click me If Receive</button>
+        </div>    
+        <div class="alert alert-success alert-dismissable mt-5" ng-if="orderdata.orderDetails[0].Received==1">
+            <i class="fa fa-check"></i>
+            <!-- <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> -->
+            <strong>{{orderdata.orderDetails[0].recieverName}}</strong> received it on the {{examdatechange(orderdata.orderDetails[0].CurrentDate) | date : 'dd-MM-y'}}.
+        </div>
+    </div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
