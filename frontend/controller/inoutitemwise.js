@@ -52,4 +52,10 @@ angular.module('stock').controller('inoutitemwise',function($scope,$http,$timeou
 		})
 	}
 
+	$scope.sumByKey = (array, key)=> {
+        return array.reduce((sum, obj) => {
+            return sum + (obj[key] || 0);
+        }, 0);
+    }
+
 });

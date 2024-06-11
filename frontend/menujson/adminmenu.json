@@ -136,7 +136,7 @@
     },    
 	{
 		"parents": "Shipment",
-		"icon": "fa fa-book",
+		"icon": "fa fa-bus",
 		"links"		:	"shipment",
         "submenu": [             
             {
@@ -170,7 +170,7 @@
     },
 	{
 		"parents": "Reports",
-		"icon": "fa fa-book",
+		"icon": "fa fa-sticky-note",
 		"links"		:	"reports",
         "submenu": [             
             {
@@ -192,6 +192,20 @@
 				"links"		:	"#daterangeinoutwards",
                 "tag" 		: 	"/daterangeinoutwards",
 				"url"		:	"daterangeinoutwards.html",
+				"controller":	"daterangeinoutwards"
+            },
+			{
+				"title"		:	"Item in between Dates",
+				"links"		:	"#iteminbtwdates",
+                "tag" 		: 	"/iteminbtwdates",
+				"url"		:	"iteminbtwdates.html",
+				"controller":	"daterangeinoutwards"
+            },
+			{
+				"title"		:	"Campus stock between dates",
+				"links"		:	"#camusstockbtwdates",
+                "tag" 		: 	"/camusstockbtwdates",
+				"url"		:	"camusstockbtwdates.html",
 				"controller":	"daterangeinoutwards"
             },
 			{

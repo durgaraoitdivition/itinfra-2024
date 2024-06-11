@@ -1,0 +1,129 @@
+
+    <div ng-app="stock" ng-controller="daterangeinoutwards">
+        <!-- header logo: style can be found in header.less -->
+
+        <aside class="right-side">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1>
+                        Campus wise stock between dates
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li class="active">In/Outwards</li>
+                    </ol>
+                </section>
+        
+			
+
+                <!-- Main content -->
+                <section class="content">
+					
+					<div class="box box-primary">
+                        <div class="box-body">
+                            <form name="itemwisedata" ng-submit="getcmpwisestockbtwdates(stock)">
+                                <div class="row">
+                                    <div class="col-sm-2 col-md-2 form-group">
+                                        <label>Select Type</label>
+                                        <select name="shipmentType" ng-model="stock.shipmentType" class="form-control" required>  
+                                            <option value="">Select Institute</option> 
+                                            <option value="Inward">Inward</option> 
+                                            <option value="Outward">Outward</option> 
+                                        </select> 
+                                    </div>
+                                    <div class="col-sm-2 col-md-2 form-group">
+                                        <label>From Date</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input type="text" class="form-control" datepicker ng-model="stock.fromDate" name="fromDate" id="fromDate" autocomplete="off">
+                                            <!-- <input type="text" class="form-control pull-right" ng-model="daterange" name="daterange" id="daterange" autocomplete="off"/> -->
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-2 col-md-2 form-group">
+                                        <label>To Date</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input type="text" class="form-control" datepicker ng-model="stock.toDate" name="toDate" id="toDate" autocomplete="off">
+                                            <!-- <input type="text" class="form-control pull-right" ng-model="daterange" name="daterange" id="daterange" autocomplete="off"/> -->
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-2 form-group" ng-init="InstMaster()">
+                                        <label>Select Institute</label>
+                                        <select ng-model="stock.instid" class="form-control" ng-change="getcmplist(stock.instid)" required>  
+                                              <option value="">Select Institute</option>  
+                                              <option ng-repeat="x in Instlist" value="{{x.instid}}">{{x.shortcode}}</option>  
+                                         </select> 
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>Select Campus</label>
+                                        <select ng-model="stock.campusid" class="form-control">  
+                                        <option value="">Select Campus</option>  
+                                        <option ng-repeat="x in getcampuslist" value="{{x.campusName}}">{{x.campusName}}</option>  
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2 col-md-2 form-group"><br />
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                           <!-- {{daterangedata | json}} -->
+                           <h4  ng-if="itemwisedata.length==0" class="text-danger">No data found</h4>
+                           <div ng-if="itemwisedata.length>0">
+                            
+                                <table class="table table-striped table-bordered" id="cmpstock">
+                                    <thead>
+                                        <tr>
+                                            <th>S.No</th>
+                                            <th>Order Id</th>
+                                            <th>Sent</th>
+                                            <th>Item Group</th>
+                                            <th>Item Name</th>
+                                            <th>Quantity</th>
+                                            <th>Received by</th>
+                                        </tr>	
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="x in itemwisedata | orderBy:'-ShipId'">
+                                            <td>{{$index+1}}</td>
+                                            <td>{{x.ADSHPid}}</td>
+                                            <td>{{examdatechange(x.CurrentDate) | date : 'dd-MM-y'}}</td>
+                                            <td>{{x.ItemGroup}}</td>
+                                            <td>{{x.ItemName}}</td>
+                                            <td>{{x.Quantity}}</td>
+                                            
+                                            <td> 
+                                                <span ng-if="x.Received==1">
+                                                    <span ng-if="x.recieverName!=null">{{x.recieverName}} - {{x.recieverDesignation}}<br /></span> {{examdatechange(x.ReceivedDate) | date : 'dd-MM-y'}}
+                                                </span>
+                                                <span ng-if="x.Received==0">
+                                                    Shipped/ In Transit
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                        </div>   
+                                  
+
+                        </div>
+                    </div>  
+                    
+                   
+                </section>
+     	 </aside>     
+        <!-- add new calendar event modal -->
+
+  
+       
+    
+  
+  
+
+
+    </div>

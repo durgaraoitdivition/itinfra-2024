@@ -10,7 +10,7 @@ angular.module('stock').controller('shippinginfo',function($scope,$http,$filter,
 			
 			
 			//var apiurl = "http://10.60.1.19:3000/api/";
-
+			$scope.currentDate = new Date()
 			$scope.inwordshow = 0;
 			$scope.CampusMaster = function(){
 				$http.get(apiurl+"ItInfraCampusMasters").success(function(data){
@@ -110,22 +110,28 @@ angular.module('stock').controller('shippinginfo',function($scope,$http,$filter,
 					instId : $scope.it.instid,
 					courier
 				}
-				$http.post(itinfra+"order/create", finalobj).success(function(data){
-					// console.log(data)
-					location.reload()
-				});
+				console.log(finalobj)
+				// $http.post(itinfra+"order/create", finalobj).success(function(data){
+				// 	// console.log(data)
+				// 	location.reload()
+				// });
 			}
 			
 		}
+		$scope.backtotrack = () =>{
+			location.reload()
+		}
+		$scope.printMode = false;
 		$scope.printdiv = (branch, sendercmpid, shipid, couriername) =>{
 			console.log(branch, sendercmpid, shipid, couriername)
+			$scope.printMode = true;
 			// console.log(sendercmpid);
 			$http.get(apiurl+"ItInfraCampusMasters?filter=%7B%22where%22%3A%7B%22campusName%22%3A%22"+branch+"%22%7D%7D").success(function(cinfo){
 				// console.log(cinfo);
 				$scope.todetail = cinfo;
 				$http.get(apiurl+"dbreports/UserInfobyCPid?CampusId="+cinfo[0].id).success(function(userinfo){
-					//console.log(userinfo);
-					$scope.tonumber = userinfo;
+					console.log(userinfo);
+					$scope.tonumber = userinfo.filter(e=>e.UserType==2);
 					$http.get(apiurl+"ItInfraShipments?filter=%7B%22where%22%3A%7B%22adshpid%22%3A%22"+shipid+"%22%7D%7D").success(function(data){
 						// console.log(data);
 							if(data.length>0){
@@ -136,6 +142,7 @@ angular.module('stock').controller('shippinginfo',function($scope,$http,$filter,
 									$scope.couriername = couriername;
 									$scope.shipmentid = shipid;
 									setTimeout(() => {
+										
 										window.print()
 									}, 1000);
 								});
@@ -153,8 +160,13 @@ angular.module('stock').controller('shippinginfo',function($scope,$http,$filter,
 				if (dataTable) {
 					dataTable.DataTable().destroy();
 				}
-				$http.get(apiurl+"Itinfrashipments?filter=%7B%22where%22%3A%7B%22senderCampusId%22%3A%22"+$scope.userdata[0].campusid+"%22%2C%20%22received%22%3A%22"+val+"%22%7D%7D").success(function(data){
-							console.log(data);
+				if(title=='All'){
+					var dataapi = apiurl+"Itinfrashipments?filter=%7B%22where%22%3A%7B%22senderCampusId%22%3A%22"+$scope.userdata[0].campusid+"%22%7D%7D";
+				} else {
+					var dataapi = apiurl+"Itinfrashipments?filter=%7B%22where%22%3A%7B%22senderCampusId%22%3A%22"+$scope.userdata[0].campusid+"%22%2C%20%22received%22%3A%22"+val+"%22%7D%7D";
+				}
+				$http.get(dataapi).success(function(data){
+							// console.log(data);
 							$scope.shiplist = data;
 							if($scope.userdata[0].username!='admin'){
 								$scope.shiplist = $scope.shiplist.filter(e=>e.senderid==$scope.userdata[0].userid)
@@ -187,6 +199,7 @@ angular.module('stock').controller('shippinginfo',function($scope,$http,$filter,
 										  curname = $scope.shiplist[i].couriername;
 										  status = $scope.shiplist[i].received;
 										  items = resultArray.filter(e=>e.adshpid==$scope.shiplist[i].adshpid);
+										  recieverName = $scope.shiplist[i].recieverName
 									}
 									
 								}
@@ -204,7 +217,8 @@ angular.module('stock').controller('shippinginfo',function($scope,$http,$filter,
 									"CurrentDate" : curdate,
 									"CourierName" : curname,
 									"Status" : status,
-									items
+									items,
+									recieverName
 								}
 							
 							}
@@ -226,7 +240,7 @@ angular.module('stock').controller('shippinginfo',function($scope,$http,$filter,
 								}
 							 }, 400)
 					
-							//console.log($scope.finalsplist);
+							// console.log($scope.finalsplist);
 							
 						});	
 			}
@@ -405,6 +419,15 @@ angular.module('stock').controller('shippinginfo',function($scope,$http,$filter,
 				// console.log(data);
 				location.reload();
 			});
+		}
+
+		$scope.voucherprint = (shipid, status)=>{
+			$http.get(itinfra+"order/receivers/"+shipid).success(function(data){
+				console.log(data)
+				$scope.orderdata = data.filter(e=>e.status==status);
+				var url = "https://analysis.aditya.ac.in/itinfra/issue-voucher/index.html?refid="+$scope.orderdata[0].shipmentId+"-"+$scope.orderdata[0].id
+				window.open(url, '_blank')
+			})
 		}
 	
 			$scope.examdatechange = function(dt)

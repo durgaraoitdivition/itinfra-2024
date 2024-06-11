@@ -1,4 +1,7 @@
-
+<style>
+	.text-white {color: #ffffff !important;}
+</style>
+   
    <div ng-app="stock" ng-controller="shippinginfo">
         <!-- header logo: style can be found in header.less -->
 
@@ -20,15 +23,20 @@
                 <!-- Main content -->
                 <section class="content">
 					
-                    		<div class="box box-primary hidden-print">
+                    	<div class="box box-primary" ng-if="printMode==false">
+							<h4 class="visible-print">Date : {{examdatechange(currentDate) | date : 'dd-MM-y'}}</h4>
 							<div class="box-header hidden-print">
 								<div class="box-tools pull-left">
-									<h4 style="padding-left:10px ;"><b>{{titleName}}</b></h4>
+									<h4 style="padding-left:10px ;">
+										<b>{{titleName}}</b>
+									</h4>
 								</div>
 									<div class="box-tools pull-right" ng-init="Allottids()">
-                                        <a href="#/bookshipment" class="btn btn-primary btn-sm" style="color:#FFFFFF">New</a>
-										<a href="" ng-click="shippinglist(0, 'In Transit')" class="btn btn-warning btn-sm" style="color:#FFFFFF">In Transit</a>
-										<a href="" ng-click="shippinglist(1, 'Received')" class="btn btn-success btn-sm" style="color:#FFFFFF">Received</a>
+                                        <a href="#/bookshipment" ng-class="(titleName === 'New') ? 'btn btn-sm btn-primary text-white' : 'btn btn-default btn-sm'"><b>New</b></a>
+										<a href="" ng-click="shippinglist(0, 'All')" ng-class="(titleName === 'All') ? 'btn btn-sm btn-primary text-white' : 'btn btn-default btn-sm'"><b>All</b></a>
+										<a href="" ng-click="shippinglist(0, 'In Transit')" ng-class="(titleName === 'In Transit') ? 'btn btn-sm btn-primary text-white' : 'btn btn-default btn-sm'"><b>In Transit</b></a>
+										<a href="" ng-click="shippinglist(1, 'Received')" ng-class="(titleName === 'Received') ? 'btn btn-sm btn-primary text-white' : 'btn btn-default btn-sm'"><b>Received</b></a>
+
                                     </div>
                                 </div><!-- /.box-header -->
                                 <div class="box-body" ng-init="shippinglist(0, 'In Transit')">
@@ -42,12 +50,14 @@
 												<th>Date</th>
 												<th>Campus Name</th>
 												<th>Items</th>
-												<th>Courier Name</th>
 												<th>Quantity</th>
-												<th>Update Ref.No</th>
-												<th>Status</th>
-												<th>Print</th>
-												<th>SMS</th>
+												<th>Courier</th>
+												
+												<!-- <th width="120">Update Ref.No</th>
+												
+												<th>Status</th> -->
+												<th class="hidden-print">Print</th>
+												<th class="hidden-print">WhatsApp</th>
 											  </tr>
 											</thead>
 											<tbody>
@@ -65,26 +75,27 @@
 														
 													</ul>
 												</td>
-												<td>{{item.CourierName}}</td>
 												<td align="center"><a href="#adshipidwiselist?adshipid={{item.Shipmentid}}">{{item.Itemcount}}</a></td>
-												
 												<td>
+													{{item.CourierName}}<br />
 													<div class="input-group input-group-sm" ng-show="item.CurPickId==null">
 														<input type="text" ng-model="item.curid" class="form-control">
 														<span class="input-group-btn">
-															<button class="btn btn-info btn-flat" type="button" ng-click="updatecrid(item)">Update</button>
+															<button class="btn btn-info btn-flat" type="button" ng-click="updatecrid(item)"><i class="fa fa-send"></i></button>
 														</span>
 													</div>
-													<span ng-hide="item.CurPickId==''">{{item.CurPickId}}</span>
-												</td>
-												<td>
-													<strong ng-show="item.Status == '1'" class="text-success">Received</strong>
+													<span ng-hide="item.CurPickId==''">{{item.CurPickId}}</span><br />
+													<strong ng-show="item.Status == '1'" class="text-success">{{item.recieverName}}</strong>
 													<strong ng-show="item.Status == '0' && item.CurPickId==null">Shipped</strong>
 													<strong ng-show="item.Status == '0' && item.CurPickId!=null" class="text-warning">In Transit</strong>
 												</td>
-												<td><button class="btn btn-primary btn-sm" ng-click="printdiv(item.Branch, item.senderCampusId, item.Shipmentid, item.CourierName)"><i class="fa fa-print"></i></button></td>
-												<td ng-show="item.Status == 0">
-													<button class="btn btn-default" data-toggle="modal" data-target="#sendsms" ng-click="shipsmsclick(item)"><i class="fa fa-envelope"></i> Re-Send SMS</button>
+												
+												<td class="hidden-print">
+													<button class="btn btn-primary btn-sm" ng-click="printdiv(item.Branch, item.senderCampusId, item.Shipmentid, item.CourierName)" ng-show="item.Status == '0'"><i class="fa fa-print"></i></button>
+													<button class="btn btn-primary btn-sm" ng-click="voucherprint(item.Shipmentid, 'Received')" ng-show="item.Status == '1'"><i class="fa fa-print"></i></button>
+												</td>
+												<td class="hidden-print" ng-show="item.Status == 0">
+													<button class="btn btn-default" data-toggle="modal" data-target="#sendsms" ng-click="shipsmsclick(item)"> Re-Send</button>
 												</td>
 											  </tr>
 											</tbody>
@@ -94,7 +105,8 @@
 									<div style="clear:both"></div>
                                 </div><!-- /.box-body -->
 							</div>	
-								<div  class="visible-print">
+								<div ng-if="printMode==true">
+									<a href="" ng-click="backtotrack()" class="btn btn-default pull-right  hidden-print"><i class="fa fa-angle-double-left"></i> Back</a>
 									<table style="margin-bottom:30px; width:100%;" height="340">
 										<tr>
 											<td valign="top"> 
@@ -107,7 +119,10 @@
 										<tr>	
 											<td valign="bottom">
 												 <h2><strong>From</strong></h2>
-												 <h4>{{fromadress[0].instname}} <br />{{fromadress[0].campusAddress}} <br /> {{fromadress[0].campusCity}} <br /> Contact Number : {{userdata[0].userphone}}</h4>
+												 <h4>
+													<span ng-if="fromadress[0].id==73">ITDIVISION</span> 
+														<span ng-if="fromadress[0].id!=73">{{fromadress[0].instname}}</span>
+														 <br />{{fromadress[0].campusAddress}} <br /> {{fromadress[0].campusCity}} <br /> Contact Number : {{userdata[0].userphone}}</h4>
 											</td>
 										</tr>
 									</table>
@@ -118,7 +133,8 @@
 									<h4><strong>To</strong></h4>
 									<p>{{todetail[0].instname}}, {{todetail[0].campusAddress}},  {{todetail[0].campusCity}}, Contact Number : {{tonumber[0].userPhone}}</p>
 									<h4><strong>From</strong></h4>
-									<p>{{fromadress[0].instname}}, {{fromadress[0].campusAddress}},  {{fromadress[0].campusCity}}, Contact Number : {{userdata[0].userphone}}</p>	
+									<p><span ng-if="fromadress[0].id==73">ITDIVISION</span> 
+										<span ng-if="fromadress[0].id!=73">{{fromadress[0].instname}}</span>, {{fromadress[0].campusAddress}},  {{fromadress[0].campusCity}}, Contact Number : {{userdata[0].userphone}}</p>	
 									<!-- <h4><b>Shipment Id : </b>{{shipmentid}}</h4>		 -->
 									<table class="table table-bordered">
 											<thead>

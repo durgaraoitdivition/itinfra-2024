@@ -4,11 +4,11 @@
 
         <aside class="right-side">
                 <!-- Content Header (Page header) -->
-                <section class="content-header">
+                <!-- <section class="content-header">
                     <h1>
-                        {{ItName}}
+                        Items wise In/Outwards
                     </h1>
-                </section>
+                </section> -->
         
 			
 
@@ -17,8 +17,25 @@
 					
 					
                             <div class="box box-primary">
-                                <div class="box-header text-right" style="padding-top: 10px;padding-right: 10px;">
-                                    <a href="#campusinoutwards" class="btn btn-primary btn-sm text-white">Back</a>
+                                <div class="box-header" style="padding: 10px 10px 0px 10px;">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <p>Item Group</p>
+                                            <h4><b>{{itemwisedata[0].ItemGroup}}</b></h4>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p>Item Location</p>
+                                            <h4><b>{{itemwisedata[0].ItemName}}</b></h4>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p>No.of Items</p>
+                                            <h4><b>{{sumByKey(itemwisedata, 'Quantity')}}</b></h4>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <a href="" ng-click="doTheBack()" class="btn btn-default pull-right"><i class="fa fa-angle-double-left"></i> Back</a>
+                                        </div>
+                                    </div>
+                                    <!-- <a href="#campusinoutwards" class="btn btn-primary btn-sm text-white">Back</a> -->
                                     <div style="clear: both;"></div>
                                 </div>
                                 <div class="box-body">
@@ -27,8 +44,8 @@
                                             <tr>
                                                 <th>S.No</th>
                                                 <th>Campus</th>
-                                                <th>Item Group</th>
-                                                <th>Item Name</th>
+                                                <!-- <th>Item Group</th>
+                                                <th>Item Name</th> -->
                                                 <th>Quantity</th>
                                                 <th>Sent</th>
                                                 <th>Received</th>
@@ -38,8 +55,8 @@
                                             <tr ng-repeat="x in itemwisedata">
                                                 <td>{{$index+1}}</td>
                                                 <td>{{x.CampusName}}</td>
-                                                <td>{{x.ItemGroup}}</td>
-                                                <td>{{x.ItemName}}</td>
+                                                <!-- <td>{{x.ItemGroup}}</td>
+                                                <td>{{x.ItemName}}</td> -->
                                                 <td>{{x.Quantity}}</td>
                                                 <td>{{examdatechange(x.CurrentDate) | date : 'dd-MM-y'}}</td>
                                                 <td>{{examdatechange(x.ReceivedDate) | date : 'dd-MM-y'}}</td>

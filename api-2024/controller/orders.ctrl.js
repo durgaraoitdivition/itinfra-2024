@@ -49,23 +49,23 @@ module.exports = {
     },
 
     createOrder: async (req, res, next) => {
-        var reqdata = req.body;
-        var arr = reqdata.items;
-        var noofitems = sumByKey(arr, 'quantity')
-        console.log(noofitems)
-        var senderInfo = reqdata.sender[0];
-        var courierInfo = reqdata.courier
-        if(courierInfo.crrefno=='' || courierInfo.crrefno==undefined){
-            var curstatus = 'Shipped';
-        } else {
-            var curstatus = 'In Transit'
-        }
-        if(courierInfo.couriername=='Our Staff'){
-            var crnewname = courierInfo.couriername+' '+courierInfo.crrefno
-        } else {
-            var crnewname = courierInfo.couriername;
-        }
         try {
+            var reqdata = req.body;
+            var arr = reqdata.items;
+            var noofitems = sumByKey(arr, 'quantity')
+            console.log(noofitems)
+            var senderInfo = reqdata.sender[0];
+            var courierInfo = reqdata.courier
+            if(courierInfo.crrefno=='' || courierInfo.crrefno==undefined){
+                var curstatus = 'Shipped';
+            } else {
+                var curstatus = 'In Transit'
+            }
+            // if(courierInfo.couriername=='Our Staff'){
+            //     var crnewname = courierInfo.couriername+' '+courierInfo.crrefno
+            // } else {
+            //     var crnewname = courierInfo.couriername;
+            // }
             var getreceivers = await getusersinfo(reqdata.rcvcampusId);
             var receivers = getreceivers.filter(e=>e.userLevel!='LabAssistant');
             // console.log(receivers)
@@ -292,8 +292,17 @@ module.exports = {
         var reqdata = req.body;
         
         try {
-            
-            var finalres = await query("select *  from ItInfraShipment where shipmentType='"+reqdata.shipmentType+"' and CurrentDate BETWEEN '"+reqdata.fromDate+" 00:00:00' AND '"+reqdata.toDate+"  23:59:59' and CampusName='"+reqdata.campus+"' and ItemGroup='"+reqdata.ItemGroup+"' and ItemName='"+reqdata.ItemName+"' order by CurrentDate")
+            if(reqdata.campus=='All'){
+                var filtercdn = "";
+            } else {
+                var filtercdn = " and CampusName='"+reqdata.campus+"'"; 
+            }
+            if(reqdata.ItemGroup=='All' && reqdata.ItemName=='All'){
+                var filteritem = "";
+            } else {
+                var filteritem = " and ItemGroup='"+reqdata.ItemGroup+"' and ItemName='"+reqdata.ItemName+"'"; 
+            }
+            var finalres = await query("select *  from ItInfraShipment where shipmentType='"+reqdata.shipmentType+"' and CurrentDate BETWEEN '"+reqdata.fromDate+" 00:00:00' AND '"+reqdata.toDate+"  23:59:59' "+filtercdn+" "+filteritem+" order by CurrentDate")
             res.status(200).send(finalres)
         } catch(err) {
             console.log(err); // console log the error so we can see it in the console
