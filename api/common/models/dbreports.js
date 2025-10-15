@@ -46,7 +46,7 @@ module.exports = function(Dbreports)
 	
 	Dbreports.getuserinfo = function(CampusId,callback) {
 		const dataSource=Dbreports.app.datasources.mysql;
-		// console.log("select * from ItInfraUsers where CONCAT(',', CampusId, ',') like '%,"+CampusId+",%' and status=1")
+		console.log("select * from ItInfraUsers where CONCAT(',', CampusId, ',') like '%,"+CampusId+",%' and status=1")
 		dataSource.connector.execute("select * from ItInfraUsers where CONCAT(',', CampusId, ',') like '%,"+CampusId+",%' and status=1",(err,res)=>{
 		//dataSource.connector.execute("select * from ItInfraUsers where CampusId IN ("+CampusId+")",(err,res)=>{
 			console.log(res);
