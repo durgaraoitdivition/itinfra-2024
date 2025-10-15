@@ -27,7 +27,6 @@ module.exports = function() {
             }
         }
         
-        console.log(smsobj);
         const ordersms = await fetch(analysisApi+'sms/sendsms', {
             method: 'post',
             body: JSON.stringify(smsobj),
@@ -179,11 +178,13 @@ module.exports = function() {
                     return reject(error);
                 } else {
                     // console.log(elements)
-                    const firstPhone = cmpincharge[0].campus_phone.includes(',') ? cmpincharge[0].campus_phone.split(',')[0].trim()  : cmpincharge[0].campus_phone.trim();
+                    // const firstPhone = cmpincharge[0].campus_phone.includes(',') ? cmpincharge[0].campus_phone.split(',')[0].trim()  : cmpincharge[0].campus_phone.trim();
+                    var findcomma = cmpincharge[0].campus_phone.split(',').map(item => item.trim());
+                    // console.log(findcomma)
                     var cmpobj = {
                         userName: cmpincharge[0].campus_incharge,
                         userEmail: cmpincharge[0].campus_email,
-                        userPhone: firstPhone,
+                        userPhone: findcomma[0],
                         userLevel: 'Principal'
                     }
                     elements.push(cmpobj);

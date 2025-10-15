@@ -1,5 +1,5 @@
-require("dotenv").config();
-// require('dotenv').config({ path: '/home/devteam/apis/itinfra2024/.env' });
+// require("dotenv").config();
+require('dotenv').config({ path: '/home/devteam/apis/itinfra2024/.env' });
 const baseurl = "/";
 const express = require('express');
 const port = 6600;
@@ -11,6 +11,8 @@ app.use(cors({
   "optionSucessstatus":200
 }));
 const orderrtr = require("./router/orders.router")
+const upsVendors = require('./router/upsvendors.router');
+const upsTickets = require('./router/upstickets.router');
 
 app.use(express.json({limit: '50mb'}));
 
@@ -24,7 +26,8 @@ app.use(function(req, res, next) {
 
 
 app.use(baseurl+"order", orderrtr)
-
+app.use(baseurl+'upsvendors', upsVendors);
+app.use(baseurl+'upstickets', upsTickets);
 
 app.get("/", (req, res)=>{
     res.json({
