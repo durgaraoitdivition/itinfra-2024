@@ -121,7 +121,26 @@
 				"url"		:	"bookshipment.html",
 				"controller":	"shippinginfo"
             }]
+    },
+	{
+		"parents": "UPS",
+		"icon": "fa fa-ticket",
+		"links"		:	"tickets",
+        "submenu": [  
+			{
+				"title"		:	"Tickets Create / List",
+				"links"		:	"#upstickets",
+                "tag" 		: 	"/upstickets",
+				"url"		:	"upstickets.html",
+				"controller":	"upstickets"
+            },
+			{
+				"title"		:	"",
+				"links"		:	"#upsticketupdate",
+                "tag" 		: 	"/upsticketupdate",
+				"url"		:	"upsticketupdate.html",
+				"controller":	"upsticketupdate"
+            }]
     }
-    
 	 
 ]

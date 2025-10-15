@@ -1,8 +1,9 @@
 var app = angular.module("itinfra", []);
 
 app.controller('report', function($scope, $http, $filter) {
-    let apipath = 'http://10.70.3.73:6600/'; 
-    // let apipath = 'https://apis.aditya.ac.in/itinfra24/';
+    // let apipath = 'http://10.70.3.73:6600/'; 
+    //let apipath = 'http://10.60.1.9:3002/api/';
+    let apipath = 'https://apis.aditya.ac.in/itinfra24/';
         
     // Get the URL of the current page
     const url = new URL(window.location.href);
@@ -12,7 +13,7 @@ app.controller('report', function($scope, $http, $filter) {
     const refid = $scope.userid.split("-")[0];
     // console.log(refid)
 	$http.get(apipath+"order/details/"+refid).success(function(data){
-        console.log(data)
+        // console.log(data)
         $scope.orderdata = data;
     })
 

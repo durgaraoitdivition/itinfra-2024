@@ -216,5 +216,32 @@
 				"controller":	"itemsbtndates"
             }
 		]
+    },
+	{
+		"parents": "UPS",
+		"icon": "fa fa-ticket",
+		"links"		:	"tickets",
+        "submenu": [             
+            {
+				"title"		:	"Vendors Add / List",
+				"links"		:	"#upsvendors",
+                "tag" 		: 	"/upsvendors",
+				"url"		:	"upsvendors.html",
+				"controller":	"upsvendors"
+            },
+			{
+				"title"		:	"Tickets Create / List",
+				"links"		:	"#upstickets",
+                "tag" 		: 	"/upstickets",
+				"url"		:	"upstickets.html",
+				"controller":	"upstickets"
+            },
+			{
+				"title"		:	"",
+				"links"		:	"#upsticketupdate",
+                "tag" 		: 	"/upsticketupdate",
+				"url"		:	"upsticketupdate.html",
+				"controller":	"upsticketupdate"
+            }]
     } 
 ]

@@ -12,7 +12,7 @@ app.controller('receipt', function($scope, $http, $filter) {
     const refid = $scope.userid.split("-")[0];
     // console.log(refid)
 	$http.get(apipath+"order/details/"+refid).success(function(data){
-        // console.log(data)
+        console.log(data)
         $scope.orderdata = data;
     })
     $scope.confirm = false;
@@ -24,7 +24,7 @@ app.controller('receipt', function($scope, $http, $filter) {
         var result = confirm("Are you sure you received this order?");
 			if (result) {
                 $http.post(apipath+"order/updatefromsms/", obj).success(function(data){
-                    // console.log(data);
+                    console.log(data);
                     location.reload();
                 })
             }    

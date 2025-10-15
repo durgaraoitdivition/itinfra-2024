@@ -166,8 +166,8 @@ angular.module('stock').controller('stockinfo',function($scope,$http,$filter,$co
 		//console.log(obj);
 
 		$http.post(apiurl+"dbreports/UpdateInfraids",obj).success(function(data){
-				console.log(data);
-				//location.reload();
+				// console.log(data);
+				location.reload();
 			});
 	}
 	
@@ -200,7 +200,7 @@ angular.module('stock').controller('stockinfo',function($scope,$http,$filter,$co
 			item.ticketusername = $scope.userdata[0].username;
 			item.ticketdate = $scope.mysqldate(new Date());
 			item.ticketnumber = data[0].ticketnumber+1;
-			console.log(item);
+			// console.log(item);
 			let obj = {
 				ticketinfo : item
 			}

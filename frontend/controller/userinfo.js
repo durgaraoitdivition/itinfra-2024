@@ -14,8 +14,9 @@ angular.module('stock').controller('userinfo',function($scope,$http,$timeout,$fi
 		}
 		$scope.userList = [];
 		$scope.ItInfraUsers = function(){
-			$http.get(apiurl+"ItInfraUsers").success(function(data){
-				//console.log(data);
+console.log(apiurl+"ItInfraUsers")
+			$http.get(apiurl+"ItInfraUsers?filter=%7B%22where%22%3A%7B%22status%22%3A1%7D%7D").success(function(data){
+				console.log(data);
 				$timeout(function() {
 					//$("#noCampaignData").hide();
 					var rowCount = $("#userdata tr").length;
@@ -34,7 +35,8 @@ angular.module('stock').controller('userinfo',function($scope,$http,$timeout,$fi
 					}
 				 }, 400)
 
-				$scope.userList = data;
+				//$scope.userList = data.filter(e=>e.status==1);
+$scope.userList = data;
 			});	
 			 
 		}

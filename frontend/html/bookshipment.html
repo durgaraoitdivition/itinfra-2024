@@ -182,7 +182,8 @@
 									
 									</div>	
 										<!--{{sippeditems | json}}-->
-									<form method="post" name="shipping" ng-submit="itemssubmit(sippeditems,crf)" class="hidden-print">	
+									<form method="post" name="shipping" ng-submit="itemssubmit(sippeditems,crf, it.campusid, it.instid)" class="hidden-print">
+										<h4 class="text-center text-primary">{{msg}}</h4>
 										<div class="row">
 											<div class="col-md-6">
 												<div class="form-group">
@@ -220,7 +221,8 @@
 												<input type="text" ng-model="crf.recieverDesignation" class="form-control" />
 											</div>
 											<div class="col-md-2 form-group"><br /><br />
-												<input type="submit" class="btn btn-primary" value="Submit" />
+												<input type="submit" ng-show="proccessing==false" class="btn btn-primary" value="Submit" />
+												<h4 class="text-danger" ng-show="proccessing==true">Please Wait...</h4>
 											</div>
 										</div>
 									</form>

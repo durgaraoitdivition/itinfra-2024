@@ -24,7 +24,7 @@
                 <section class="content">
 					
                     	<div class="box box-primary" ng-if="printMode==false">
-							<h4 class="visible-print">Date : {{examdatechange(currentDate) | date : 'dd-MM-y'}}</h4>
+							<h4 class="visible-print">Date : {{currentDate  | utcDate}}</h4>
 							<div class="box-header hidden-print">
 								<div class="box-tools pull-left">
 									<h4 style="padding-left:10px ;">
@@ -47,12 +47,13 @@
 											  <tr>
 												<th>#</th>
 												<th>Shipment Id</th>
-												<th>Date</th>
-												<th>Campus Name</th>
+												<th width="80">Date</th>
 												<th>Items</th>
-												<th>Quantity</th>
+												<th>Desc</th>
+												<th>Qty</th>
 												<th>Courier</th>
 												
+												<th>Campus</th>
 												<!-- <th width="120">Update Ref.No</th>
 												
 												<th>Status</th> -->
@@ -67,14 +68,14 @@
 											  <tr ng-repeat="item in finalsplist | orderBy : '-Shipmentid'">
 												<td>{{$index+1}}</td>
 												<td>{{item.Shipmentid}}</td>
-												<td>{{examdatechange(item.CurrentDate) | date : 'dd-MM-y'}}</td>
-												<td>{{item.Branch}}</td>
-												<td>
+												<td>{{item.CurrentDate | utcDate}}</td>
+												<td width="240">
 													<ul style="list-style-type: none; padding:0; margin:0">
 														<li ng-repeat="s in item.items">{{s.itemname}} <strong class="pull-right">{{s.quantity}}</strong> <span ng-if="$index+1!=item.items.length"><hr  style=" margin:5px 0; border-top: 1px solid #cacaca;"/></span></li>
 														
 													</ul>
 												</td>
+												<td>{{item.shipmentmsg}}</td>
 												<td align="center"><a href="#adshipidwiselist?adshipid={{item.Shipmentid}}">{{item.Itemcount}}</a></td>
 												<td>
 													{{item.CourierName}}<br />
@@ -85,11 +86,19 @@
 														</span>
 													</div>
 													<span ng-hide="item.CurPickId==''">{{item.CurPickId}}</span><br />
-													<strong ng-show="item.Status == '1'" class="text-success">{{item.recieverName}}</strong>
+													
 													<strong ng-show="item.Status == '0' && item.CurPickId==null">Shipped</strong>
 													<strong ng-show="item.Status == '0' && item.CurPickId!=null" class="text-warning">In Transit</strong>
+													<strong ng-show="item.Status == '1'" class="text-success">Received</strong>
 												</td>
-												
+												<td>
+													{{item.Branch}}<br />
+													<div ng-show="item.Status == '1'">
+														<hr style="margin: 5px 0;" />
+														<small>Received By</small><br />
+														<strong>{{item.recieverName}}</strong>
+													</div>
+												</td>
 												<td class="hidden-print">
 													<button class="btn btn-primary btn-sm" ng-click="printdiv(item.Branch, item.senderCampusId, item.Shipmentid, item.CourierName)" ng-show="item.Status == '0'"><i class="fa fa-print"></i></button>
 													<button class="btn btn-primary btn-sm" ng-click="voucherprint(item.Shipmentid, 'Received')" ng-show="item.Status == '1'"><i class="fa fa-print"></i></button>
@@ -139,7 +148,7 @@
 									<table class="table table-bordered">
 											<thead>
 												<tr>
-													<th colspan="5">{{examdatechange(adidwiselist[0].currentdate) | date : 'dd-MM-y'}} <span style="float: right;">#{{shipmentid}}</span></th>
+													<th colspan="5">{{adidwiselist[0].currentdate | utcDate}} <span style="float: right;">#{{shipmentid}}</span></th>
 												</tr>
 											  <tr>
 												<th>#</th>

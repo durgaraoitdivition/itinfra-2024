@@ -1,0 +1,113 @@
+<div ng-app="stock" ng-controller="upstickets">
+    <!-- header logo: style can be found in header.less -->
+
+    <aside class="right-side">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                UPS Tickets
+                <small>Tickets</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active">Tickets</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="box box-primary">
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-8 form-group" ng-init="loadTickets()">
+                            
+                           
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <h4 style="margin:0;" class="mb-2">List</h4>
+                                </div>
+                                <div class="col-md-4">
+                                    <select class="form-control" ng-model="statuscode" ng-change="statuswisetickets(statuscode)">
+                                        <option value="ALL">All</option>
+                                        <option value="OPEN">Open</option>
+                                        <option value="COMPLETED">Close</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <hr style="margin-top: 6px;" />
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Ticket No.</th>
+                                        <th>Campus</th>
+                                        <th>Company Info</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="ticket in tickets" ng-if="tickets.length>0">
+                                        <td>{{ ticket.ticketNo }}</td>
+                                        <td>{{ ticket.campus }}</td>
+                                        <td><b>{{ ticket.companyName }}</b> <br />{{ ticket.mobileNo }} <br />{{ ticket.email }}</td>
+                                        <td><b ng-class="(ticket.status === 'OPEN') ? 'text-primary' : 'text-warning'">{{ ticket.status }}</b><br />{{ticket.description}}</td>
+                                        <td>
+                                            <button class="btn btn-info btn-sm" ng-click="getTicket(ticket.utid)" ng-if="ticket.status=='OPEN'">Edit</button>
+                                            <a href="#upsticketupdate?ticketno={{ticket.ticketNo}}" class="btn btn-warning btn-sm">Update</a>
+                                            <!-- <button class="btn btn-danger" ng-click="deleteTicket(ticket.utid)">Delete</button> -->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-danger text-center" colspan="6" ng-if="tickets.length==0">
+                                            No Data Found
+                                        </th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-4 form-group">
+                            <h4 style="margin:0">Create</h4>
+                            <hr />
+                            
+                            <form ng-submit="createTicket(ticket)">
+                                <!-- {{ticket | json}} -->
+                                    <div class="form-group">
+                                        <label>Select Company</label>
+                                        <select ng-model="ticket.upsvid" id="upsvid" class="form-control" ng-change="getVendor(ticket.upsvid)" name="upsvid" required>  
+                                              <option value="">Select Company</option>  
+                                              <option ng-repeat="x in vendors" value="{{x.upsvid}}" ng-selected="x.upsvid===ticket.upsvid">{{x.upsvname}}</option>  
+                                         </select>
+                                    </div>
+                                <div class="form-group">
+                                    <label for="mobileNo">Mobile No.</label>
+                                    <input type="text" class="form-control" id="mobileNo" ng-model="ticket.mobileNo" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="alternateMobileNo">Alternate Mobile No.</label>
+                                    <input type="text" class="form-control" id="alternateMobileNo" ng-model="ticket.alternateMobileNo" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">E-mail</label>
+                                    <input type="text" class="form-control" id="email" ng-model="ticket.email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Description</label>
+                                    <textarea ng-model="ticket.description" id="description"  rows="5" class="form-control" required></textarea>
+                                </div>
+                                
+                                <!-- Add more fields as needed -->
+                                <button type="submit" class="btn btn-primary">Create Ticket</button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                
+                    
+                </div>
+            </div>
+
+
+        </section>
+    </aside>
+    <!-- add new calendar event modal -->
+</div>

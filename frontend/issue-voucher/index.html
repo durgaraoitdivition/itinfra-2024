@@ -122,7 +122,7 @@
                                 
                                 <div ng-if="orderdata.orderDetails[0].Received==1" style="font-size: 12px;">
                                     <strong>Received By</strong><br />
-                                    {{orderdata.orderDetails[0].recieverName}} - {{orderdata.orderDetails[0].recieverDesignation}}<br />  
+                                    {{orderdata.orderDetails[0].recieverName}} - <span ng-if="['Dr N Suguna', 'N K S KANTHI'].indexOf(orderdata.orderDetails[0].recieverName) === -1">{{orderdata.orderDetails[0].recieverDesignation}}</span><span ng-if="orderdata.orderDetails[0].recieverName=='Dr N Suguna'">Director</span><span ng-if="orderdata.orderDetails[0].recieverName=='N K S KANTHI'">PA TO SECRETARY MADAM</span><br />  
                                     {{examdatechange(orderdata.orderDetails[0].CurrentDate) | date : 'dd-MM-y'}}.
                                 </div>
                             </td>
